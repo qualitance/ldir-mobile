@@ -1,0 +1,47 @@
+<ion-view>
+    <ion-nav-title>
+        {{viewTitle}}
+    </ion-nav-title>
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon" ng-click="toggleLeftSidenav()" ng-disabled="downloadingMap">
+            <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+        </button>
+    </ion-nav-buttons>
+    <ion-content data-tap-disabled="true">
+        <leaflet
+            defaults="map.defaults"
+            center="map.center"
+            markers="map.markers"
+            layers="map.layers"
+            ng-if="map"
+            markers-watch-options="mapData.markersWatchOptions"
+            reload="{{mapData.reload}}"
+            new-markers="map.newMarkers">
+        </leaflet>
+        <div class="center-marker"></div>
+        <div class="map-buttons-holder" ng-hide="downloadMode">
+            <md-button ng-click="locate()" class="md-fab position-button" aria-label="My Position">
+                <md-icon md-svg-icon="img/icons/my-location.svg"></md-icon>
+            </md-button>
+            <md-progress-circular ng-if="gettingPosition" md-mode="indeterminate" md-diameter="60"
+                                  class="position-loader"></md-progress-circular>
+            <md-button class="md-fab report-button"
+                       ng-click="reportPile()"
+                       aria-label="Report Pile">
+                <md-icon md-svg-icon="img/icons/add.svg"></md-icon>
+            </md-button>
+        </div>
+        <div class="download-map-action" ng-if="downloadMode">
+            <md-progress-linear ng-if="downloadingMap" md-mode="indeterminate"></md-progress-linear>
+            <div layout="row" class="actions-holder">
+                <md-button ng-disabled="downloadingMap" ui-sref="app.map" flex>{{'views.map.cancelButton' |
+                    translate}}
+                </md-button>
+                <md-divider></md-divider>
+                <md-button ng-disabled="downloadingMap || online == false" ng-click="downloadOffline()" flex
+                           class="md-primary">{{'views.map.downloadButton' | translate}}
+                </md-button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

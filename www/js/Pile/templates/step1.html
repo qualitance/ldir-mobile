@@ -1,0 +1,38 @@
+<ion-view title="{{'views.pile.stepTitle' | translate}}1" can-swipe-back="false">
+    <ion-nav-buttons side="left">
+        <button ng-click="goBack()"
+                ng-click-options="{preventDoubleClick: true}"
+                class="button button-icon icon">
+            <md-icon md-svg-icon="img/icons/arrow_back.svg">
+            </md-icon>
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button ng-click="goToStep2()"
+                ng-click-options="{preventDoubleClick: true}"
+                class="button button-icon icon">
+            <md-icon md-svg-icon="img/icons/arrow_forward.svg">
+            </md-icon>
+        </button>
+    </ion-nav-buttons>
+    <div class="pile-report-step-container" md-swipe-right="onSwipeRight()" md-swipe-left="onSwipeLeft()">
+        <pile-photo
+            photo="photo"
+            ng-click="zoomImage(photo.displaySrc)"
+            remove-photo="removePhoto($index)"
+            ng-repeat="photo in pile.photos"
+            has-controls="true"></pile-photo>
+        <div class="card" ng-if="pile.photos.length < maxPhotoCount">
+            <div class="item item-text-wrap">
+                <md-whiteframe class="md-whiteframe-z3" layout="column" layout-align="center center">
+                    <md-button class="md-primary summary-button" data-tap-disabled="true" ng-click="takePhoto()"
+                               ng-click-options="{preventDoubleClick: true}">{{'views.pile.photos.button1' | translate}}
+                    </md-button>
+                    <md-button class="md-primary summary-button" data-tap-disabled="true" ng-click="uploadPhoto()"
+                               ng-click-options="{preventDoubleClick: true}">{{'views.pile.photos.button2' | translate}}
+                    </md-button>
+                </md-whiteframe>
+            </div>
+        </div>
+    </div>
+</ion-view>

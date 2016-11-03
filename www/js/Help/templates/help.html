@@ -1,0 +1,27 @@
+<ion-view title="{{'views.help.title' | translate}}" can-swipe-back="false">
+    <ion-nav-buttons side="left">
+        <button ng-if="hasHelpSlider"
+                ng-click="goBack()"
+                ng-click-options="{preventDoubleClick: true}"
+                class="button button-icon icon">
+            <md-icon md-svg-icon="img/icons/arrow_back.svg">
+            </md-icon>
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button ng-if="!hasHelpSlider"
+                ng-click="setHelpFlag()"
+                ng-click-options="{preventDoubleClick: true}"
+                class="button button-icon icon navbar-button">
+            <span ng-if="isLastStep">{{'views.help.action1' | translate}}</span>
+            <span ng-if="!isLastStep">{{'views.help.action2' | translate}}</span>
+        </button>
+    </ion-nav-buttons>
+    <ion-content scroll="false">
+        <ion-slide-box show-pager="1" class="height100" on-slide-changed="slideHasChanged($index)">
+            <ion-slide ng-repeat="i in [1,2,3,4,5,6]">
+                <help-step step="{{i}}" language="{{language}}"></help-step>
+            </ion-slide>
+        </ion-slide-box>
+    </ion-content>
+</ion-view>

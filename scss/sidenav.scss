@@ -1,0 +1,31 @@
+/*
+	LEFT SIDENAV STYLES
+*/
+
+.left-sidenav-toolbar{
+	background-color: $nav-bar-green !important;
+	color: #fff !important;
+    height: auto !important;
+  	max-height: 200px !important;
+    background: url("../img/bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+  .ios-profile-margin-top {
+	margin-top: 18px;
+  }
+
+	h1, h2, h3, h4, h5{
+		color: #fff !important;
+	}
+}
+
+.green-icon{
+	color: $nav-bar-green !important;
+
+	svg{
+		fill: $nav-bar-green !important;
+		opacity: 1;
+	}
+}
+

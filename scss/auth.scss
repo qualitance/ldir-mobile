@@ -1,0 +1,100 @@
+/*
+	AUTH FLOW STYLES
+*/
+
+.login-view {
+//  background: #efefef;
+}
+
+.header-text {
+  img {
+    max-width: 100%;
+  }
+
+  margin-bottom: 50px;
+}
+
+.facebook-button {
+
+  color: $facebook-blue !important;
+  text-transform: none;
+  font-weight: $bold6;
+  font-size: 1.2em;
+  padding: 0 15px;
+  line-height: 40px;
+
+  i {
+    font-size: 30px;
+    line-height: 38px;
+    width: 40px;
+    padding-right: 6px;
+    vertical-align: middle;
+    border-right: solid 1px #ddd;
+    margin-right: 10px;
+    margin-left: -10px;
+  }
+
+  svg {
+    fill: $facebook-blue;
+  }
+}
+
+.login-tabs {
+
+  md-content {
+//    background: #efefef;
+  }
+
+  md-tabs-wrapper  {
+    md-next-button,
+    md-prev-button {
+      display: none;
+    }
+  }
+  .md-paginated {
+    margin: 0;
+  }
+
+  md-pagination-wrapper {
+    background: $ldr_green;
+
+    .md-tab {
+      padding: 7px 0;
+      font-size: 13px;
+      font-weight: bold;
+      color: #bdd8b9;
+
+      &.md-active {
+        color: white;
+      }
+    }
+
+    md-ink-bar {
+      background: $ldr_yellow;
+      color: $ldr_yellow;
+      height: 4px;
+
+    }
+  }
+}
+
+.login-big-button {
+  font-size: 1.2em;
+  min-width: 110px;
+  line-height: 46px;
+  min-height: 45px;
+}
+
+.or-section {
+  margin: 15px 0 10px 0;
+  text-transform: uppercase;
+  font-size: 1.1em;
+  color: $gray5;
+}
+
+.terms-section {
+  text-align: center;
+  a {
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,28 @@
+<md-dialog aria-label="Pile popup">
+    <md-dialog-content class="sticky-container padding0px">
+        <md-subheader class="md-sticky-no-effect margin0px">{{'views.myContribution.pileLabel' | translate}}
+            #{{pile.nr_ord}}
+        </md-subheader>
+        <div class="dialog-content">
+            <p class="size-paragraph"><span class="size-text">{{'views.pile.size.title2' | translate}} </span>
+                <pile-size class="popup-size" editable="false" size="pile.size"></pile-size>
+            </p>
+            <p>{{'dialogs.pile.type' | translate}}:
+            <span ng-repeat="content in pile.content">
+                {{'views.pile.content.'+content.split(' ').join('') | lowercase | translate}}<span
+                ng-show="!$last">,</span>
+            </span>
+            </p>
+            <p>{{'views.pile.details.status' | translate}} <span class="pile-status pile-{{pile.status}}">{{'pile.status.'+pile.status | translate}}</span>
+            </p>
+        </div>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="cancel()" class="md-primary">
+            {{'buttons.cancel' | translate}}
+        </md-button>
+        <md-button class="md-primary summary-button float-right" ng-click="goToDetails()">
+            {{'views.pile.step4.details' | translate}}
+        </md-button>
+    </div>
+</md-dialog>

@@ -1,0 +1,29 @@
+<md-content layout="row" layout-align="space-around center">
+    <div layout="row" layout-align="space-around center">
+        <div layout="column" class="size-container" layout-align="center center">
+            <md-icon class="pile-size-icon" md-svg-icon="img/icons/icon_bag.svg" ng-click="setSize(1)"
+                     ng-class="{'pile-size-small': size<=2, 'pile-size-medium': size==3, 'pile-size-big': size==4, 'pile-size-huge': size==5}"></md-icon>
+            <span class="pile-size-text-small">3x90L</span>
+        </div>
+        <div layout="column" class="size-container" layout-align="center center">
+            <md-icon class="pile-size-icon" md-svg-icon="img/icons/icon_bag.svg" ng-click="setSize(2)"
+                     ng-class="{'pile-size-small': size==2, 'pile-size-medium': size==3, 'pile-size-big': size==4, 'pile-size-huge': size==5}"></md-icon>
+            <span class="pile-size-text-small">10x90L</span>
+        </div>
+        <div layout="column" class="size-container" layout-align="center center">
+            <md-icon class="pile-size-icon" md-svg-icon="img/icons/icon_bag.svg" ng-click="setSize(3)"
+                     ng-class="{'pile-size-medium': size==3, 'pile-size-big': size==4, 'pile-size-huge': size==5}"></md-icon>
+            <span class="pile-size-text-small">25x90L</span>
+        </div>
+        <div layout="column" class="size-container" layout-align="center center">
+            <md-icon class="pile-size-icon" md-svg-icon="img/icons/icon_bag.svg" ng-click="setSize(4)"
+                     ng-class="{'pile-size-big': size==4, 'pile-size-huge': size==5}"></md-icon>
+            <span class="pile-size-text-small">50x90L</span>
+        </div>
+        <div layout="column" class="size-container" layout-align="center center">
+            <md-icon class="pile-size-icon" md-svg-icon="img/icons/icon_bag.svg" ng-click="setSize(5)"
+                     ng-class="{'pile-size-huge': size>=5}"></md-icon>
+            <span class="pile-size-text-small">>75x90L</span>
+        </div>
+    </div>
+</md-content>

@@ -1,0 +1,92 @@
+<ion-view title="{{'views.pile.stepTitle' | translate}}4" can-swipe-back="false">
+    <ion-nav-buttons side="left">
+        <button ng-click="goBack()"
+                ng-click-options="{preventDoubleClick: true}"
+                class="button button-icon icon">
+            <md-icon md-svg-icon="img/icons/arrow_back.svg">
+            </md-icon>
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button ng-click="savePile()"
+                ng-click-options="{preventDoubleClick: true}"
+                class="button button-icon icon navbar-button">
+            <span>{{'views.pile.step4.save' | translate}}</span>
+        </button>
+    </ion-nav-buttons>
+    <div class="pile-report-step-container" md-swipe-right="onSwipeRight()" md-swipe-left="onSwipeLeft()">
+        <div class="list-inset progress-container grey-background">
+            <h4>{{'views.pile.step4.summary' | translate}}</h4>
+        </div>
+        <pile-size-card size="pile.size" title="Size" editable="1"></pile-size-card>
+        <div class="card">
+            <div class="item item-text-wrap">
+                <p>{{'views.pile.step4.details' | translate}}</p>
+                <md-content layout="row" layout-align="space-between center" class="summary-content">
+                    <div>
+                        <p>
+						<span ng-repeat="content in pile.content">
+							{{'views.pile.content.'+content.split(' ').join('') | lowercase | translate}}<span
+                            ng-show="!$last">,</span>
+						</span>
+                        </p>
+                    </div>
+                    <md-button class="md-primary summary-button" ui-sref="app.pile.step2">{{'views.pile.step4.change' |
+                        translate}}
+                    </md-button>
+                </md-content>
+            </div>
+        </div>
+        <div class="card">
+            <div class="item item-text-wrap">
+                <p>{{'views.pile.details.photos' | translate}}</p>
+                <md-content layout="row" layout-align="space-between center" class="summary-content">
+                    <div>
+                        <p>{{'views.pile.step4.addedPhotos1' |
+                            translate}}{{pile.photos.length}}{{'views.pile.step4.addedPhotos2' | translate}}</p>
+                    </div>
+                    <md-button class="md-primary summary-button" ui-sref="app.pile.step1">{{'views.pile.step4.change' |
+                        translate}}
+                    </md-button>
+                </md-content>
+            </div>
+        </div>
+        <div class="card">
+            <div class="item item-text-wrap">
+                <p>{{'views.pile.details.gps' | translate}}</p>
+                <md-content layout="row" layout-align="space-between center" class="summary-content">
+                    <p><span ng-bind-html="pile.location.lat | decToDms:'lat'"></span> <span
+                        ng-bind-html="pile.location.lng | decToDms:'lng'"></span></p>
+                </md-content>
+            </div>
+        </div>
+        <div class="card">
+            <div class="item item-text-wrap">
+                <p>{{'views.pile.details.area' | translate}}</p>
+                <md-content layout="row" layout-align="space-between center" class="summary-content">
+                    <div>
+                        <p>
+						<span ng-repeat="area in pile.areas">
+							{{'views.pile.areas.'+area | lowercase | translate}}<span ng-show="!$last">,</span>
+						</span>
+                        </p>
+                    </div>
+                    <md-button class="md-primary summary-button" ui-sref="app.pile.step2">{{'views.pile.step4.change' |
+                        translate}}
+                    </md-button>
+                </md-content>
+            </div>
+        </div>
+        <div class="card">
+            <div class="item item-text-wrap">
+                <p>{{'views.pile.step4.comments' | translate}}</p>
+                <md-content layout="row" layout-align="space-between center" class="summary-content">
+                    <p>{{pile.description}}</p>
+                </md-content>
+                <md-button class="md-primary summary-button float-right" ui-sref="app.pile.step3">
+                    {{'views.pile.step4.change' | translate}}
+                </md-button>
+            </div>
+        </div>
+    </div>
+</ion-view>

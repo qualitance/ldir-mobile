@@ -1,0 +1,16 @@
+<div class="grey-background">
+    <div class="list-inset progress-container grey-background">
+        <div class="progress-icon" ng-class="{'current': step==1, 'past': step>1 }" ng-click="goTo('app.pile.step1')">
+            <md-icon md-svg-icon="img/icons/photo-camera.svg"></md-icon>
+        </div>
+        <div class="progress-icon" ng-class="{'current': step==2, 'past': step>2 }" ng-click="goTo('app.pile.step2')">
+            <md-icon md-svg-icon="img/icons/icon_bag.svg"></md-icon>
+        </div>
+        <div class="progress-icon" ng-class="{'current': step==3, 'past': step>3 }" ng-click="goTo('app.pile.step3')">
+            <md-icon md-svg-icon="img/icons/edit.svg"></md-icon>
+        </div>
+        <div class="progress-icon" ng-class="{'current': step==4 }" ng-click="goTo('app.pile.step4')">
+            <md-icon md-svg-icon="img/icons/search.svg"></md-icon>
+        </div>
+    </div>
+</div>

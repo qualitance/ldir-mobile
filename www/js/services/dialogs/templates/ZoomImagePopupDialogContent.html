@@ -1,0 +1,12 @@
+<md-dialog aria-label="Pile image popup" class="height100 width100">
+    <md-dialog-content class="sticky-container padding0px height100 width100">
+        <ion-scroll zooming="true" direction="xy" style="width: 100%; height: calc(100% - 52px);">
+            <img ng-src="{{image}}" class="height100"></img>
+        </ion-scroll>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="cancel()" class="md-primary">
+            {{'buttons.close' | translate}}
+        </md-button>
+    </div>
+</md-dialog>

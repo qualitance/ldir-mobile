@@ -1,0 +1,94 @@
+<ion-view title="{{'views.myContribution.title' | translate}}">
+    <ion-nav-buttons side="left">
+        <button ng-click="goBack()"
+                ng-click-options="{preventDoubleClick: true}"
+                class="button button-icon icon">
+            <md-icon md-svg-icon="img/icons/arrow_back.svg">
+            </md-icon>
+        </button>
+    </ion-nav-buttons>
+    <ion-pane>
+        <ion-pane style="background-color: rgba(255,255,255,0.7);">
+            <md-content layout="column" class="top-tab-container" ng-class="{'ios-tab-margin': isIos}">
+                <md-tabs class="height100 login-tabs" md-selected="selectedContributionTab" md-border-bottom
+                         md-stretch-tabs="always">
+                    <md-tab label="{{'views.myContribution.tab1' | translate}}">
+                        <md-tab-template>
+                            <ion-scroll style="height: calc(100% - 42px); width: 100%;  position: absolute;">
+                                <ion-refresher
+                                    pulling-text="{{'views.refresher' | translate}}"
+                                    on-refresh="getReportedPiles(true)">
+                                </ion-refresher>
+                                <div layout="column" flex class="height100">
+                                    <md-list>
+                                        <div ng-repeat="pile in reportedPiles ">
+                                            <md-list-item class="md-3-line" ng-click="goToDetail(pile._id)">
+                                                <img ng-src="{{pile.images[0].thumb_src}}" class="md-avatar"
+                                                     alt="pile image"/>
+                                                <div class="md-list-item-text">
+                                                    <h3>{{'views.myContribution.pileLabel' | translate}}
+                                                        {{pile.nr_ord}}</h3>
+                                                    <h4>{{'views.myContribution.reportedLabel' | translate}}
+                                                        {{pile.created_at | datefilter}}</h4>
+                                                    <p>{{'pile.status.'+pile.status | translate}}</p>
+                                                </div>
+                                            </md-list-item>
+                                        </div>
+                                        <div style="height: 20px"></div>
+                                    </md-list>
+                                    <p data-ng-show="loadedAllReported && reportedPiles && reportedPiles.length == 0"
+                                       style="padding: 0 16px;">
+                                        {{'views.myContribution.noPiles' | translate}}
+                                    </p>
+                                </div>
+
+                                <ion-infinite-scroll
+                                    data-ng-if="!loadedAllReported"
+                                    on-infinite="getReportedPiles()"
+                                    distance="20%">
+                                </ion-infinite-scroll>
+                            </ion-scroll>
+                        </md-tab-template>
+                    </md-tab>
+                    <md-tab label="{{'views.myContribution.title' | translate}}">
+                        <md-tab-template>
+                            <ion-scroll style="height: calc(100% - 42px); width: 100%; position: absolute;">
+                                <ion-refresher
+                                    pulling-text="{{'views.refresher' | translate}}"
+                                    on-refresh="getContributedPiles(true)">
+                                </ion-refresher>
+                                <div layout="column" flex class="height100">
+                                    <md-list>
+                                        <div ng-repeat="pile in contributedPiles track by $index ">
+                                            <md-list-item class="md-3-line" ng-click="goToDetail(pile._id)">
+                                                <img ng-src="{{pile.images[0].thumb_src}}" class="md-avatar"
+                                                     alt="pile image"/>
+                                                <div class="md-list-item-text">
+                                                    <h3>{{'views.myContribution.pileLabel' | translate}}
+                                                        {{pile.nr_ord}}</h3>
+                                                    <h4>{{'views.myContribution.reportedLabel' | translate}}
+                                                        {{pile.created_at | datefilter}}</h4>
+                                                    <p>{{'pile.status.'+pile.status | translate}}</p>
+                                                </div>
+                                            </md-list-item>
+                                        </div>
+                                        <div style="height: 20px"></div>
+                                    </md-list>
+                                    <p data-ng-show="loadedAllContributed && contributedPiles && contributedPiles.length == 0"
+                                       style="padding: 0 16px;">
+                                        {{'views.myContribution.noContributedPiles' | translate}}
+                                    </p>
+                                </div>
+                                <ion-infinite-scroll
+                                    data-ng-if="!loadedAllContributed"
+                                    on-infinite="getContributedPiles()"
+                                    distance="20%">
+                                </ion-infinite-scroll>
+                            </ion-scroll>
+                        </md-tab-template>
+                    </md-tab>
+                </md-tabs>
+            </md-content>
+        </ion-pane>
+    </ion-pane>
+</ion-view>

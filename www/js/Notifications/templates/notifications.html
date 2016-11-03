@@ -1,0 +1,43 @@
+<ion-view title="{{'view.notification.title' | translate}}">
+    <ion-nav-buttons side="left">
+        <button ng-click="goBack()"
+                ng-click-options="{preventDoubleClick: true}"
+                class="button button-icon icon">
+            <md-icon md-svg-icon="img/icons/arrow_back.svg">
+            </md-icon>
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+        <ion-refresher
+            pulling-text="{{'views.refresher' | translate}}"
+            on-refresh="getNotifications(true)">
+        </ion-refresher>
+        <md-list>
+            <md-list-item ng-repeat="activity in notifications track by $index" class="md-2-line"
+                          ng-click="goToDetail(activity.pile._id)">
+                <img ng-src="{{activity.pile.images[0].thumb_src}}" class="md-avatar" alt="pile  image"/>
+                <div class="md-list-item-text">
+                    <h3 class="notification-text"><span ng-if="activity.verb == 'pending'">{{'view.notification.pending1' | translate}}<strong>#{{activity.pile.nr_ord}}</strong>{{'view.notification.pending2' | translate}}</span>
+                        <span ng-if="activity.verb == 'confirmation.confirm'">{{'view.notification.confirm' | translate}}<strong>#{{activity.pile.nr_ord}}</strong>.</span>
+                        <span ng-if="activity.verb == 'confirmation.unconfirm'">{{'view.notification.pile' | translate}}<strong>#{{activity.pile.nr_ord}}</strong>{{'view.notification.unConfirm' | translate}}</span>
+                        <span ng-if="activity.verb == 'reported'">{{'view.notification.pile' | translate}}<strong>#{{activity.pile.nr_ord}}</strong>{{'view.notification.reported' | translate}}</span>
+                        <span ng-if="activity.verb == 'clean'">{{'view.notification.pile' | translate}}<strong>#{{activity.pile.nr_ord}}</strong> has been successfully cleaned.</span>
+                        <span ng-if="activity.verb == 'comment'">{{'view.notification.comment' | translate}}<strong>#{{activity.pile.nr_ord}}</strong>.</span>
+                        <span ng-if="activity.verb == 'confirmed'">{{'view.notification.confirmed' | translate}}<strong>#{{activity.pile.nr_ord}}</strong>.</span>
+                        <span
+                            ng-if="activity.verb == 'unconfirmed'">{{'view.notification.unConfirmed' | translate}}<strong>#{{activity.pile.nr_ord}}</strong>.</span>
+                    </h3>
+                    <p>{{activity.pile.last_update | datefilter}}</p>
+                </div>
+            </md-list-item>
+        </md-list>
+        <p data-ng-show="loadedAll && notifications && notifications.length == 0" style="padding: 0 16px;">
+            {{'view.notification.noNotifications' | translate}}
+        </p>
+        <ion-infinite-scroll
+            ng-if="!loadedAll"
+            on-infinite="getNotifications()"
+            distance="1%">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,342 @@
+/*
+	PILE STYLES
+*/
+
+$progress-icon-radius: 60px;
+
+.pile-size-icon {
+  height: 60px;
+  width: 60px;
+
+  svg {
+    fill: #FFF;
+  }
+
+  &.pile-size-small{
+    svg {
+      fill: $pile-green !important;
+    }
+  }
+  &.pile-size-medium{
+    svg {
+      fill: $medium-yellow !important;
+    }
+  }
+  &.pile-size-big{
+    svg {
+      fill: $big-orange !important;
+    }
+  }
+  &.pile-size-huge{
+    svg {
+      fill: $huge-red !important;
+    }
+  }
+
+  &.selected-size {
+    svg {
+      fill: $pile-green;
+    }
+
+    &.immutable {
+      svg {
+        fill: $pile-yellow;
+      }
+    }
+  }
+}
+
+.pile-size-text {
+  font-size: 13px;
+}
+.size-container {
+  width: 45px;
+  text-align: center;
+  .pile-size-text-small {
+    font-size: 8px;
+  }
+}
+
+
+.progress-container {
+  position: relative;
+
+  .progress-icon {
+    display: inline-block;
+    border-radius: 50%;
+    border: 1px solid $inactive-gray;
+    width: $progress-icon-radius;
+    height: $progress-icon-radius;
+
+    background-color: #fff;
+
+    margin-left: 0;
+    margin-right: calc((100% - #{$progress-icon-radius * 4}) / 3);
+    float: left;
+
+    &:last-child {
+      margin-right: 0;
+
+      &::after {
+        content: '';
+      }
+    ;
+    }
+
+    &:nth-child(1) {
+      &::after {
+        content: '';
+        position: absolute;
+        top: 24px;
+        left: $progress-icon-radius;
+        width: calc((100% - #{$progress-icon-radius * 4}) / 3);
+        height: 10px;
+        background: #fff;
+        border-top: 1px solid $inactive-gray;
+        border-bottom: 1px solid $inactive-gray;
+      }
+    ;
+    }
+
+    &:nth-child(2) {
+      &::after {
+        content: '';
+        position: absolute;
+        top: 24px;
+        left: calc(#{$progress-icon-radius * 2} + (100% - #{$progress-icon-radius * 4}) / 3);
+        width: calc((100% - #{$progress-icon-radius * 4}) / 3);
+        height: 10px;
+        background: #fff;
+        border-top: 1px solid $inactive-gray;
+        border-bottom: 1px solid $inactive-gray;
+      }
+    ;
+    }
+
+    &:nth-child(3) {
+      &::after {
+        content: '';
+        position: absolute;
+        top: 24px;
+        left: calc(#{$progress-icon-radius * 3} + 2 * (100% - #{$progress-icon-radius * 4}) / 3);
+        width: calc((100% - #{$progress-icon-radius * 4}) / 3);
+        height: 10px;
+        background: #fff;
+        border-top: 1px solid $inactive-gray;
+        border-bottom: 1px solid $inactive-gray;
+      }
+    ;
+    }
+
+    md-icon {
+      margin-top: 18px;
+      margin-left: 18px;
+
+      svg {
+        fill: $inactive-gray;
+      }
+    }
+
+    &.past {
+      background-color: $pile-green;
+      border: $pile-green;
+
+      md-icon svg {
+        fill: #fff;
+      }
+
+      &:nth-child(1) {
+        &::after {
+          background-color: $pile-green;
+          border: $pile-green;
+        }
+      ;
+      }
+
+      &:nth-child(2) {
+        &::after {
+          background-color: $pile-green;
+          border: $pile-green;
+        }
+      ;
+      }
+
+      &:nth-child(3) {
+        &::after {
+          background-color: $pile-green;
+          border: $pile-green;
+        }
+      ;
+      }
+    }
+
+    &.current {
+      background-color: $progress-yellow;
+      border: $progress-yellow;
+
+      md-icon svg {
+        fill: #fff;
+      }
+    }
+  }
+}
+
+.comment-text {
+  height: 100%;
+  width: 100%;
+  background: url(../img/icons/edit.svg);
+  background-size: 60px 60px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  resize: none;
+  border: none;
+
+  &:focus, &.has-text {
+    background: none;
+  }
+;
+}
+
+/*
+	STEP1 PHOTO STYLES
+*/
+.photo-card {
+  height: 150px;
+  position: relative;
+
+  .photo-controls {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 0;
+    height: 40px;
+    background-color: gray;
+    opacity: .5;
+  }
+
+  md-icon {
+    position: absolute;
+    right: 10px;
+    top: 119px;
+
+    svg {
+      fill: #fff;
+    }
+  }
+}
+
+.summary-button {
+  margin: 0;
+  color: $pile-green !important;
+  font-size: 1em !important;
+}
+
+.summary-content {
+  min-height: 60px;
+}
+
+/*
+	PILE DETAILS STYLE
+*/
+
+.confirm-yes-button {
+  color: #FFF !important;
+  background-color: $pile-green !important;
+}
+
+.confirm-no-button {
+  color: #FFF !important;
+  background-color: $report-button-brown !important;
+}
+
+.pile-status {
+  color: $report-button-brown;
+  text-transform: capitalize;
+
+  &.status-confirmed {
+    color: $confirmed_color;
+  }
+
+  &.status-unconfirmed {
+    color: $unconfirmed_color;
+  }
+
+  &.status-pending {
+    color: $pending_color;
+  }
+
+  &.status-reported {
+    color: $reported_color;
+  }
+
+  &.status-clean {
+    color: $cleaned_color;
+  }
+
+}
+
+.pile-status-holder {
+  border: none;
+  padding-bottom: 0;
+  margin-top: 16px;
+
+  p {
+    font-size: 1.2rem;
+  }
+}
+
+.pile-images-holder {
+  img {
+    max-width: 100%;
+    padding: 0 5px;
+  }
+  .no-scroll-y {
+    overflow-y: hidden;
+  }
+}
+
+.pile-comments-holder {
+  .item {
+    > p {
+      line-height: 36px;
+    }
+  }
+
+  .summary-content {
+    margin-top: 16px;
+  }
+}
+
+/*
+  POPUP STYLES
+*/
+
+.size-paragraph{
+  margin: -2px 0 0 0;
+
+  .popup-size{
+    display: inline-block; 
+    width: 225px;
+
+    md-icon{
+      width: 45px;
+      height: 45px;
+    }
+  }
+
+  .size-text{
+    display: inline-block; 
+    margin-top: 6px; 
+    vertical-align: top
+  }
+}
+
+/*
+  PILE STEP VIEW CONTAINER  
+*/
+.pile-report-step-container{
+  overflow-y: scroll; 
+  overflow-x: hidden;
+  height: calc(100% - 100px);
+  background-color: $background-gray;
+}

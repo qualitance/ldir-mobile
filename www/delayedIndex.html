@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' https://codepush.azurewebsites.net http://analytics.qualitance.com https://analytics.qualitance.com 'unsafe-inline' 'unsafe-eval'">
+    <title>LDR</title>
+
+    <link href="lib/bower_components/angular-material/angular-material.min.css" rel="stylesheet">
+    <link href="lib/bower_components/leaflet.markercluster/dist/MarkerCluster.Default.css" rel="stylesheet">
+    <link href="lib/bower_components/leaflet.markercluster/dist/MarkerCluster.css" rel="stylesheet">
+    <link href="css/ionic.app.css" rel="stylesheet">
+
+    <script src="lib/bower_components/ionic/js/ionic.bundle.js"></script>
+
+    <script src="lib/leaflet/leaflet.js"></script>
+    <script src="lib/leaflet/offlinemap.min.js"></script>
+    <script src="lib/leaflet/angular-leaflet-directive.min.js"></script>
+    <script src="lib/bower_components/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+    <script src="lib/bower_components/leaflet-pip/leaflet-pip.min.js"></script>
+
+    <script src="lib/bower_components/angular-resource/angular-resource.min.js"></script>
+
+    <!-- angulartics -->
+    <script src="lib/bower_components/angulartics/dist/angulartics.min.js"></script>
+    <script src="lib/bower_components/angulartics/dist/angulartics-piwik.min.js"></script>
+
+    <!-- material design -->
+    <script src="lib/bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="lib/bower_components/angular-messages/angular-messages.min.js"></script>
+    <script src="lib/bower_components/angular-material/angular-material.js"></script>
+
+    <!--translate-->
+    <script src="lib/bower_components/angular-translate/angular-translate.js"></script>
+    <script
+        src="lib/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+
+
+    <script src="lib/bower_components/ngCordova/dist/ng-cordova.min.js"></script>
+
+    <!-- get sentry config -->
+    <script src="lib/bower_components/raven-js/dist/raven.js"></script>
+    <script src="lib/bower_components/raven-js/dist/plugins/angular.js"></script>
+    <script src="lib/bower_components/raven-js/dist/plugins/console.js"></script>
+    <script>
+        Raven
+            .config('https://d1722789d46c46a3b26bd4380f1ea9ac@app.getsentry.com/94297')
+            .addPlugin(Raven.Plugins.Console)
+            .addPlugin(Raven.Plugins.Angular)
+            .install();
+    </script>
+
+    <!--file upload-->
+    <script src="lib/bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="lib/bower_components/ng-file-upload-shim/ng-file-upload-shim.js"></script>
+
+    <script src="cordova.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/AppController.js"></script>
+
+    <!-- DIRECTIVES -->
+    <script src="js/directives/templateDirectives.js"></script>
+
+    <!-- SERVICES -->
+    <script src="js/services/ServicesModule.js"></script>
+    <script src="js/services/AppConfig.js"></script>
+    <script src="js/services/UserService.js"></script>
+    <script src="js/services/LocalStorageService.js"></script>
+    <script src="js/services/AuthService.js"></script>
+    <script src="js/services/PushNotificationsService.js"></script>
+    <script src="js/services/NavbarSetup.js"></script>
+    <script src="js/services/PileService.js"></script>
+    <script src="js/services/ActivityService.js"></script>
+    <script src="js/services/CommentService.js"></script>
+    <script src="js/services/OfflineService.js"></script>
+    <script src="js/services/CountyService.js"></script>
+    <script src="js/services/CountryService.js"></script>
+    <script src="js/services/IssueService.js"></script>
+    <script src="js/services/CreatePileService.js"></script>
+    <script src="js/services/MarkerHelperService.js"></script>
+
+    <!-- DIALOGS -->
+    <script src="js/services/dialogs/TermsDialog.js"></script>
+    <script src="js/services/dialogs/PrivacyDialog.js"></script>
+    <script src="js/services/dialogs/VerifyEmailDialog.js"></script>
+    <script src="js/services/dialogs/PilePopupDialog.js"></script>
+    <script src="js/services/dialogs/ZoomImagePopupDialog.js"></script>
+    <script src="js/services/dialogs/LocationDialog.js"></script>
+
+    <!-- FILTERS -->
+    <script src="js/filters/DateFilter.js"></script>
+
+    <!-- AUTH MODULE -->
+    <script src="js/Auth/AuthModule.js"></script>
+    <script src="js/Auth/AuthController.js"></script>
+
+    <!-- MAP MODULE -->
+    <script src="js/Map/MapModule.js"></script>
+    <script src="js/Map/MapController.js"></script>
+
+    <!-- PROFILE MODULE -->
+    <script src="js/Profile/ProfileModule.js"></script>
+    <script src="js/Profile/ProfileController.js"></script>
+
+    <!-- HELP MODULE -->
+    <script src="js/Help/HelpModule.js"></script>
+    <script src="js/Help/HelpController.js"></script>
+    <script src="js/Help/ReportIssueController.js"></script>
+    <script src="js/Help/TermsController.js"></script>
+    <script src="js/Help/PrivacyController.js"></script>
+
+    <!-- PILE MODULE -->
+    <script src="js/Pile/PileModule.js"></script>
+    <script src="js/Pile/controllers/PileController.js"></script>
+    <script src="js/Pile/controllers/Step1Controller.js"></script>
+    <script src="js/Pile/controllers/Step2Controller.js"></script>
+    <script src="js/Pile/controllers/Step3Controller.js"></script>
+    <script src="js/Pile/controllers/Step4Controller.js"></script>
+    <script src="js/Pile/controllers/PileDetailsController.js"></script>
+    <script src="js/Pile/controllers/PileDetailsCommentsController.js"></script>
+    <script src="js/Pile/directives.js"></script>
+
+    <!-- MY CONTRIBUTION MODULE -->
+    <script src="js/MyContribution/MyContributionModule.js"></script>
+    <script src="js/MyContribution/MyContributionController.js"></script>
+
+    <!-- NOTIFICATIONS MODULE -->
+    <script src="js/Notifications/NotificationsModule.js"></script>
+    <script src="js/Notifications/NotificationsController.js"></script>
+
+</head>
+
+<body ng-app="starter" ng-class="{'platform-ios platform-cordova platform-webview' : isIos}">
+
+<ion-nav-view></ion-nav-view>
+<div ng-if="!documentLoaded" class="splashDiv"></div>
+
+</body>
+</html>

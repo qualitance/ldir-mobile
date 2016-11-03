@@ -1,0 +1,152 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #387ef5 !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+*/
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/bower_components/ionic/fonts" !default;
+$mdi-font-path: "../lib/bower_components/mdi/fonts";
+$roboto-font-path: "";
+
+// Include all of Ionic
+@import "vars";
+@import "roboto-fontface";
+@import "www/lib/bower_components/ionic/scss/ionic";
+@import "www/lib/bower_components/mdi/scss/materialdesignicons.scss";
+@import "helpers";
+@import "leaflet";
+@import "map";
+@import "sidenav";
+@import "material";
+@import "auth";
+@import "pile";
+@import "profile";
+
+body {
+  height: auto;
+  min-height: 100%;
+  font-family: Roboto-Regular;
+}
+
+.scroll, .angular-leaflet-map {
+  height: 100%;
+}
+
+.leaflet-bottom {
+  bottom : 10px;
+}
+
+.item.item-body p {
+  margin-top: 0;
+}
+
+/*
+	TABS CUSTOMIZATION
+*/
+.tabs.border-top {
+  border-top: 1px solid #ddd !important;
+}
+
+.top-tab-container{
+	top: 43px;
+	height: 100%;
+
+  &.ios-tab-margin{
+    top: 63px;
+  }
+}
+
+/*
+
+*/
+
+.green-button{
+  background-color: $button_green !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+.green-button.md-default-theme.md-raised {
+  background-color: $button_green;
+  color: white;
+  font-weight: bold;
+
+  &:not([disabled]).md-focused {
+    background-color:  darken($button_green, 10%);
+  }
+
+  &:not([disabled]):hover {
+    background-color:  lighten($button_green, 10%);
+  }
+}
+
+.md-button.md-fab.green-button {
+  background-color: $button_green;
+  color: white;
+  font-weight: bold;
+
+  &:not([disabled]).md-focused {
+    background-color:  darken($button_green, 10%);
+  }
+
+  &:not([disabled]):hover {
+    background-color:  lighten($button_green, 10%);
+  }
+}
+
+.md-fab.fab-large {
+  width: 66px;
+  height: 66px;
+  line-height: 66px;
+}
+
+.inactive-gray{
+  color: $inactive-gray !important;
+}
+
+.after-last-card{
+  height: 20px;
+}
+
+.grey-background{
+  background-color: $background-gray !important;
+}
+
+.qualitance-orange{
+  color: $qualitance_orange !important;
+}
+
+.notification-text{
+  span{
+    line-height: 1.2;
+  }
+}
+
+.splashDiv{
+  z-index: 3;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: url("../img/splash.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #fff;
+}
+
+.navbar-button {
+  font-size: 19px!important;
+  font-weight: 500!important;
+}

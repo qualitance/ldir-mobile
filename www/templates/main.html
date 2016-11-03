@@ -1,0 +1,103 @@
+<ion-side-menus>
+    <ion-side-menu-content drag-content="false">
+        <ion-nav-bar class="green-nav-bar" align-title="left">
+            <ion-nav-buttons side="left">
+                <button class="button button-icon icon" ng-click="toggleLeftSidenav()">
+                    <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+                </button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="main" animation="slide-left-right"></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="left">
+        <ion-content class="height100" scroll="false">
+            <md-toolbar class="left-sidenav-toolbar md-tall">
+                <div class="profile-holder marginleft5px" ui-sref="app.profile" menu-close
+                     ng-class="{'ios-profile-margin-top' : isIos}">
+                    <ldr-user-photo class="logo80" user="me"></ldr-user-photo>
+                    <h4 class="margintop10px marginbottom0px"><b>{{me.first_name +' '+ me.last_name}}</b></h4>
+                    <h5 ng-if="me.role == 'volunteer'" class="statistics">{{stats.pending || 0}} {{'pile.status.pending'
+                        | translate}}, {{stats.confirmed || 0}} {{'pile.status.confirmed' | translate}},
+                        {{stats.clean || 0}} {{'pile.status.clean' | translate}}</h5>
+                    <h5 ng-if="me.role == 'supervisor'" class="statistics">{{stats.pending || 0}}
+                        {{'pile.status.pending' | translate}}, {{stats.reported || 0}} {{'pile.status.confirmed' |
+                        translate}},
+                        {{stats.clean || 0}} {{'pile.status.clean' | translate}}</h5>
+                </div>
+            </md-toolbar>
+            <md-content layout-padding style="height: calc(100% - 168px);">
+                <md-list>
+                    <div ui-sref="app.map" menu-close>
+                        <md-list-item>
+                            <md-icon md-svg-src="img/icons/map.svg"></md-icon>
+                            <p> {{'menu.item.map' | translate}} </p>
+                        </md-list-item>
+                    </div>
+                    <div ui-sref="app.mycontribution" menu-close>
+                        <md-list-item>
+                            <md-icon class="green-icon" md-svg-src="img/icons/icon_leaf.svg"></md-icon>
+                            <p> {{'menu.item.contribution' | translate}} </p>
+                        </md-list-item>
+                    </div>
+                    <div ui-sref="app.map.download({download: true})" menu-close>
+                        <md-list-item>
+                            <md-icon md-svg-src="img/icons/inbox.svg"></md-icon>
+                            <p> {{'menu.item.offline' | translate}} </p>
+                        </md-list-item>
+                    </div>
+                    <div ui-sref="app.reportissue" menu-close>
+                        <md-list-item>
+                            <md-icon md-svg-src="img/icons/report.svg"></md-icon>
+                            <p> {{'menu.item.reportError' | translate}} </p>
+                        </md-list-item>
+                    </div>
+                    <div ui-sref="app.help" menu-close>
+                        <md-list-item>
+                            <md-icon md-svg-src="img/icons/help.svg"></md-icon>
+                            <p> {{'menu.item.help' | translate}} </p>
+                        </md-list-item>
+                    </div>
+
+                    <div ng-if="isIos" ui-sref="app.notifications" menu-close>
+                        <md-list-item>
+                            <md-icon md-svg-src="img/icons/notifications.svg"></md-icon>
+                            <p> {{'menu.item.notifications' | translate}} </p>
+                        </md-list-item>
+                    </div>
+                    <md-list-item ng-if="!isIos" ng-click="goToState('app.notifications')">
+                        <md-icon md-svg-src="img/icons/notifications.svg"></md-icon>
+                        <p> {{'menu.item.notifications' | translate}} </p>
+                        <md-switch class="md-secondary" ng-model="me.flags.receivePushNotifications"
+                                   ng-change="toggleNotifications()"></md-switch>
+                    </md-list-item>
+
+                    <div ui-sref="app.terms" menu-close>
+                        <md-list-item>
+                            <md-icon md-svg-src="img/icons/icon_pen.svg"></md-icon>
+                            <p> {{'menu.item.terms' | translate}} </p>
+                        </md-list-item>
+                    </div>
+                    <div ui-sref="app.privacy" menu-close>
+                        <md-list-item>
+                            <md-icon md-svg-src="img/icons/lock.svg"></md-icon>
+                            <p> {{'menu.item.privacy' | translate}} </p>
+                        </md-list-item>
+                    </div>
+                    <div ng-click="logout()" menu-close>
+                        <md-list-item>
+                            <md-icon md-svg-src="img/icons/power.svg"></md-icon>
+                            <p> {{'menu.item.logout' | translate}} </p>
+                        </md-list-item>
+                    </div>
+                    <div ng-click="goToQualitance()" menu-close>
+                        <md-list-item>
+                            <p> {{'menu.item.powered' | translate}} <span class="qualitance-orange">QUALITANCE</span>
+                            </p>
+                        </md-list-item>
+                    </div>
+                </md-list>
+            </md-content>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>
+

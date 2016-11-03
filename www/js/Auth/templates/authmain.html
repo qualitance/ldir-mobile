@@ -1,0 +1,261 @@
+<ion-view title="Login">
+    <ion-pane>
+        <ion-pane class="login-view">
+            <div ng-if="isIos" style="background-color: #3ca454; height: 20px"></div>
+            <md-tabs class="height100 login-tabs" md-border-bottom md-selected="selectedAuthTab"
+                     md-stretch-tabs="always">
+                <md-tab label="{{'views.auth.loginTab.tabLabel' | translate}}">
+                    <md-tab-template>
+                        <div layout="column" flex class="height100">
+                            <div flex="5"></div>
+                            <div flex="85">
+                                <ion-content has-bouncing="false">
+                                    <md-content class="md-padding" style="">
+                                        <div layout="row">
+                                            <div flex-sm="0" flex-md="20" flex-gt-md="30"></div>
+                                            <div flex-sm="100" flex-md="60" flex-gt-md="40">
+                                                <form name="loginForm" novalidate>
+                                                    <section layout="column" layout-margin layout-align="center center"
+                                                             class="login-logo-container">
+                                                        <h1 class="header-text">
+                                                            <img src="img/logo_green.png" alt="let's do it">
+                                                        </h1>
+                                                    </section>
+                                                    <div ng-if="loggingInWithFB" layout="row"
+                                                         layout-align="center center">
+                                                        <md-progress-circular
+                                                            md-mode="indeterminate"></md-progress-circular>
+                                                    </div>
+                                                    <div ng-hide="loggingInWithFB">
+                                                        <section layout="row" layout-align="center center">
+                                                            <md-button ng-click="facebookLogin()"
+                                                                       ng-click-options="{preventDoubleClick: true}"
+                                                                       type="button"
+                                                                       class="facebook-button md-padding md-raised">
+                                                                <div layout="row">
+                                                                    <md-icon
+                                                                        md-svg-src="img/icons/facebook.svg"></md-icon>
+                                                                    <!-- <i class="mdi mdi-facebook"></i> -->
+                                                                    <span>{{"views.auth.loginTab.FBLoginButton" | translate}}</span>
+                                                                </div>
+                                                            </md-button>
+                                                        </section>
+                                                        <section layout="column" layout-margin
+                                                                 layout-align="center center" class="or-section">
+                                                            <span>{{"views.auth.loginTab.or" | translate}}</span>
+                                                        </section>
+                                                        <section layout="column" layout-margin
+                                                                 layout-align="start start">
+                                                            <md-input-container class="width100"
+                                                                                md-is-error="loginForm.$submitted && loginForm.email.$invalid">
+                                                                <label>Email</label>
+                                                                <input required name="email" type="email"
+                                                                       ng-model="user.email">
+                                                                <div
+                                                                    ng-messages="loginForm.$submitted && loginForm.email.$error">
+                                                                    <div ng-message="required">{{'errors.required' |
+                                                                        translate}}
+                                                                    </div>
+                                                                    <div ng-message="email">{{'errors.validEmail' |
+                                                                        translate}}
+                                                                    </div>
+                                                                </div>
+                                                            </md-input-container>
+                                                            <md-input-container class="width100"
+                                                                                md-is-error="loginForm.$submitted && loginForm.password.$invalid">
+                                                                <label>{{'views.auth.loginTab.passwordLabel' |
+                                                                    translate}}</label>
+                                                                <input required type="password" name="password"
+                                                                       ng-model="user.password">
+
+                                                                <div
+                                                                    ng-messages="loginForm.$submitted && loginForm.password.$error">
+                                                                    <div ng-message="required">{{'errors.required' |
+                                                                        translate}}
+                                                                    </div>
+                                                                </div>
+                                                            </md-input-container>
+                                                        </section>
+
+                                                        <section layout="column" layout-align="center center"
+                                                                 layout-fill>
+                                                            <div>
+                                                                <md-button
+                                                                    class="green-button md-raised submit call-to-action login-big-button"
+                                                                    aria-label="Log In" ng-click="login(loginForm)"
+                                                                    ng-click-options="{preventDoubleClick: true}">
+                                                                    {{'views.auth.loginTab.loginButton' | translate}}
+                                                                </md-button>
+                                                            </div>
+                                                            <div layout="row" class="margintop10px" layout-margin
+                                                                 layout-align="space-between center">
+                                                                <md-button ui-sref="auth.resetpass">{{
+                                                                    'views.auth.loginTab.forgotPassword' | translate}}
+                                                                </md-button>
+                                                            </div>
+                                                        </section>
+                                                        <section layout-margin>
+                                                            <p class="margintop20px marginbottom20px terms-section">
+                                                                {{'views.auth.loginTab.rulesText1' | translate}}
+                                                                <a ng-click="showTerms($event)">{{'views.auth.termsLink'
+                                                                    | translate}}</a>
+                                                                {{'views.auth.and' | translate}}
+                                                                <a ng-click="showPrivacy($event)">{{'views.auth.privacyLink'
+                                                                    | translate}}</a>
+                                                                {{'views.auth.loginTab.rulesText2' | translate}}
+                                                            </p>
+                                                        </section>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div flex-sm="0" flex-md="20" flex-gt-md="30"></div>
+                                        </div>
+                                    </md-content>
+                                </ion-content>
+                            </div>
+                        </div>
+                    </md-tab-template>
+                </md-tab>
+                <md-tab label="{{'views.auth.registerTab.tabLabel' | translate}}">
+                    <md-tab-template>
+                        <div layout="column" flex class="height100">
+                            <div flex="5"></div>
+                            <div flex="85">
+                                <ion-content has-bouncing="false">
+                                    <md-content class="md-padding" style="background: transparent">
+                                        <div layout="row">
+                                            <div flex-sm="0" flex-md="20" flex-gt-md="30"></div>
+                                            <div flex-sm="100" flex-md="60" flex-gt-md="40">
+                                                <form name="registerForm" ng-if="!registered">
+                                                    <md-content>
+                                                        <section layout="column" layout-margin
+                                                                 layout-align="center center"
+                                                                 class="login-logo-container">
+                                                            <h1 class="header-text">
+                                                                <img src="img/logo_green.png" alt="let's do it">
+                                                            </h1>
+                                                        </section>
+                                                        <section layout="column" layout-margin
+                                                                 layout-align="center center">
+                                                            <md-input-container style="width:100%"
+                                                                                md-is-error="registerForm.$submitted && registerForm.first_name.$invalid">
+                                                                <label>{{'views.auth.registerTab.firstNameLabel' |
+                                                                    translate}}</label>
+                                                                <input required name="first_name"
+                                                                       ng-model="newUser.first_name">
+
+                                                                <div
+                                                                    ng-messages="registerForm.$submitted && registerForm.first_name.$error">
+                                                                    <div ng-message="required">{{'errors.required' |
+                                                                        translate}}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="md-placeholder">
+                                                                    {{'views.auth.registerTab.firstNameExample' |
+                                                                    translate}}
+                                                                </div>
+                                                            </md-input-container>
+                                                            <md-input-container style="width:100%"
+                                                                                md-is-error="registerForm.$submitted && registerForm.last_name.$invalid">
+                                                                <label>{{'views.auth.registerTab.lastNameLabel' |
+                                                                    translate}}</label>
+                                                                <input required name="last_name"
+                                                                       ng-model="newUser.last_name">
+
+                                                                <div
+                                                                    ng-messages="registerForm.$submitted && registerForm.last_name.$error">
+                                                                    <div ng-message="required">{{'errors.required' |
+                                                                        translate}}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="md-placeholder">
+                                                                    {{'views.auth.registerTab.lastNameExample' |
+                                                                    translate}}
+                                                                </div>
+                                                            </md-input-container>
+                                                            <md-input-container style="width:100%"
+                                                                                md-is-error="registerForm.$submitted && registerForm.email.$invalid">
+                                                                <label>Email</label>
+                                                                <input required name="email" type="email"
+                                                                       ng-model="newUser.email">
+                                                                <div
+                                                                    ng-messages="registerForm.$submitted && registerForm.email.$error">
+                                                                    <div ng-message="required">{{'errors.required' |
+                                                                        translate}}
+                                                                    </div>
+                                                                    <div ng-message="email">{{'errors.validEmail' |
+                                                                        translate}}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="md-placeholder">{{'views.auth.emailExample'
+                                                                    | translate}}
+                                                                </div>
+                                                            </md-input-container>
+                                                            <md-input-container style="width:100%"
+                                                                                md-is-error="registerForm.$submitted && registerForm.pass.$invalid">
+                                                                <label>{{'views.auth.registerTab.passwordLabel' |
+                                                                    translate}}</label>
+                                                                <input required type="password" name="pass"
+                                                                       ng-model="newUser.pass">
+
+                                                                <div
+                                                                    ng-messages="registerForm.$submitted && registerForm.pass.$error">
+                                                                    <div ng-message="required">{{'errors.required' |
+                                                                        translate}}
+                                                                    </div>
+                                                                </div>
+                                                            </md-input-container>
+                                                            <md-input-container style="width:100%"
+                                                                                md-is-error="registerForm.$submitted && registerForm.repass.$invalid">
+                                                                <label>{{'views.auth.registerTab.retypePasswordLabel' |
+                                                                    translate}}</label>
+                                                                <input required type="password" name="repass"
+                                                                       ng-model="newUser.repass"
+                                                                       ng-change="checkPasswordsMatch(registerForm)">
+
+                                                                <div
+                                                                    ng-messages="registerForm.$submitted && registerForm.repass.$error">
+                                                                    <div ng-message="required">{{'errors.required' |
+                                                                        translate}}
+                                                                    </div>
+                                                                    <div ng-message="noMatch">{{'errors.passwordsMatch'
+                                                                        | translate}}
+                                                                    </div>
+                                                                </div>
+                                                            </md-input-container>
+                                                            <section layout="row" class="margintop20px" layout-fill
+                                                                     layout-align="center center">
+                                                                <md-button class="md-fab green-button fab-large"
+                                                                           aria-label="Register"
+                                                                           ng-click="register(registerForm)"
+                                                                           ng-click-options="{preventDoubleClick: true}">
+                                                                    <md-icon
+                                                                        md-svg-src="img/icons/arrow_forward.svg"></md-icon>
+                                                                </md-button>
+                                                            </section>
+                                                            <p class="margintop40px marginbottom20px terms-section">
+                                                                {{'views.auth.registerTab.agreeText' | translate}}<br><a
+                                                                ng-click="showTerms($event)">{{'views.auth.termsLink' |
+                                                                translate}}</a> {{'views.auth.and' | translate}} <a
+                                                                ng-click="showPrivacy($event)">{{'views.auth.privacyLink'
+                                                                | translate}}</a>
+                                                            </p>
+                                                        </section>
+                                                    </md-content>
+                                                </form>
+                                                <div ng-if="registered">{{'views.auth.registerTab.emailSent' |
+                                                    translate}}
+                                                </div>
+                                            </div>
+                                            <div flex-sm="0" flex-md="20" flex-gt-md="30"></div>
+                                        </div>
+                                    </md-content>
+                                </ion-content>
+                            </div>
+                        </div>
+                    </md-tab-template>
+                </md-tab>
+            </md-tabs>
+        </ion-pane>
+    </ion-pane>
+</ion-view>

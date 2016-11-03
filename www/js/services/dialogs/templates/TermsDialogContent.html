@@ -1,0 +1,12 @@
+<md-dialog aria-label="Terms and conditions">
+    <md-content class="sticky-container padding0px">
+        <md-subheader class="md-sticky-no-effect margin0px">{{'menu.item.terms' | translate}}</md-subheader>
+        <div class="dialog-content" layout-padding ng-bind-html="terms">
+        </div>
+    </md-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="hide()" class="md-primary">
+            {{'buttons.close' | translate}}
+        </md-button>
+    </div>
+</md-dialog>

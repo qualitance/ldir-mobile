@@ -1,0 +1,169 @@
+/*
+	MAP RELATED STYLES
+*/
+
+.green-nav-bar{
+	background-color: $nav-bar-green;
+	color: #fff;
+
+	button{
+		color: #fff;
+	}
+
+	md-icon{
+		fill: #fff;
+	}
+}
+
+.report-button{
+	background-color: $report_blue !important;
+	svg{
+		fill: #fff !important;
+	}
+}
+
+.position-button{
+	background-color: #fff !important;
+	svg{
+		fill: $position-blue !important;
+	}
+}
+
+.position-loader{
+  position:absolute; 
+  top:9px; 
+  right: 11px;
+}
+
+/*
+	HIDE LAYER SELECT
+*/
+.leaflet-control-container .leaflet-top.leaflet-right{
+	display: none;
+}
+
+
+/*
+	MARKER POPUP CONTENT
+*/
+.leaflet-popup-content-wrapper{
+	border-radius: 0;
+}
+
+.leaflet-popup-content{
+	margin: 0;
+}
+
+
+.marker-popup {
+  padding: 0 10px;
+
+  .pile-description {
+    color: $gray7;
+    font-size: 1.2rem;
+
+    md-divider {
+      margin-top: 5px;
+    }
+
+    p {
+      margin-top: 5px;
+      margin-bottom: 0px;
+    }
+
+    .pile-title {
+      color: $gray3;
+      font-size: 1.5rem;
+    }
+
+    .pile-status {
+      text-transform: capitalize;
+    }
+
+    pile-size {
+      md-content {
+        display: inline-block;
+        vertical-align: middle;
+
+        .pile-size-icon {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+  }
+
+  .pile-link {
+
+    margin: 1rem 0;
+    font-size: 1.2rem;
+
+    a {
+      color: black;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.map-buttons-holder  {
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  transform: translate3d(0px, 0px, 1px);
+  -webkit-transform: translate3d(0px, 0px, 1px);
+
+  button {
+    display: block;
+  }
+}
+.download-map-action {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0,0,0,.5);
+
+  .md-button {
+    font-size: 1.1rem;
+  }
+
+  md-divider {
+    border-right: solid 2px #ddd;
+  }
+
+  .md-primary {
+    color: #3CA454;
+  }
+
+  .actions-holder {
+    background-color: white;
+  }
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  font-size: 35px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  margin-right: 10px;
+  color: $gray3;
+}
+
+
+.center-marker{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 55px;
+    height: 60px;
+    margin-top: -55px;
+    margin-left: -16px;
+    background:  url(../img/pins/me_pin.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    transform: translate3d(0px, 0px, 1px);
+    -webkit-transform: translate3d(0px, 0px, 1px);
+}

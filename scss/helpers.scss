@@ -1,0 +1,117 @@
+.inlineblock {
+  display: inline-block;
+}
+
+/*
+	CSS HELPER CLASSES
+*/
+
+.width100{
+  width: 100%
+}
+
+.height100{
+  height: 100%
+}
+
+.center-text{
+  text-align: center;
+}
+
+.padding0px{
+  padding: 0 !important;
+}
+
+.margin0px{
+  margin: 0 !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.float-right{
+  float: right;
+}
+
+.float-left{
+  float: left;
+}
+
+$margin_names: left right top bottom;
+$margins: 0 5 10 15 20 30 40;
+
+
+@each $name in $margin_names {
+  @each $value in $margins {
+    .margin#{$name}#{$value}px {
+      margin-#{$name}: #{$value}px !important
+    }
+
+    .padding#{$name}#{$value}px {
+      padding-#{$name}: #{$value}px !important
+    }
+  }
+}
+
+/*
+FONT WEIGHT
+*/
+$bold6: 600;
+$bold4: 400;
+$bold5: 500;
+$bold3: 300;
+
+
+$gray9: #999999;
+$gray7: #777777;
+$gray5: #555555;
+$gray3: #333333;
+
+
+.gray5 {
+  color: $gray5 !important;
+}
+.gray3 {
+  color: $gray3 !important;
+}
+.gray7 {
+  color: $gray7 !important;
+}
+.gray9 {
+  color: $gray9 !important;
+}
+
+.text-gray {
+  color: $text-gray !important;
+}
+
+.text-decoration-none {
+  text-decoration: none;
+}
+
+/*
+LOGOS
+*/
+
+$logos_dimensions: 20 25 30 35 40 45 50 55 60 70 80;
+
+@each $value in $logos_dimensions {
+  .logo#{$value} {
+    height: #{$value}px !important;
+    width: #{$value}px !important;
+    display: inline-block;
+    vertical-align: middle;
+
+    .user-photo {
+      display: inline-block;
+      width: #{$value}px;
+      height: #{$value}px;
+      object-fit: cover;
+
+      &.img-circle {
+        border-radius: 50px;
+      }
+    }
+  }
+}

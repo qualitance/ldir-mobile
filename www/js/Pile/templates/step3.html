@@ -1,0 +1,28 @@
+<ion-view title="{{'views.pile.stepTitle' | translate}}3" can-swipe-back="false">
+    <ion-nav-buttons side="left">
+        <button ng-click="goBack()"
+                ng-click-options="{preventDoubleClick: true}"
+                class="button button-icon icon">
+            <md-icon md-svg-icon="img/icons/arrow_back.svg">
+            </md-icon>
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button ng-click="goToStep4()"
+                ng-click-options="{preventDoubleClick: true}"
+                class="button button-icon icon">
+            <md-icon md-svg-icon="img/icons/arrow_forward.svg">
+            </md-icon>
+        </button>
+    </ion-nav-buttons>
+    <div class="pile-report-step-container" md-swipe-right="onSwipeRight()" md-swipe-left="onSwipeLeft()">
+        <div class="card">
+            <md-content layout-padding layout="row">
+                <md-input-container flex>
+                    <label>{{'views.pile.comments.label' | translate}}</label>
+                    <textarea ng-model="pile.description" columns="1"></textarea>
+                </md-input-container>
+            </md-content>
+        </div>
+    </div>
+</ion-view>

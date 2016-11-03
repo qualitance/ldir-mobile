@@ -1,0 +1,122 @@
+<ion-view>
+    <ion-nav-title>{{'views.pile.details.title' | translate}}{{pile.nr_ord}}</ion-nav-title>
+    <ion-nav-buttons side="left">
+        <button ng-click="goBack()"
+                ng-click-options="{preventDoubleClick: true}"
+                class="button button-icon icon">
+            <md-icon md-svg-icon="img/icons/arrow_back.svg">
+            </md-icon>
+        </button>
+    </ion-nav-buttons>
+    <ion-content class="grey-background">
+        <div layout="column" class="grey-background" layout-align="center center"
+             ng-if="!confirmFlags.isOwnPile && pile.status == 'pending'">
+            <div>
+                <h4>{{'views.pile.details.question' | translate}}</h4>
+            </div>
+            <div layout="row" layout-align="center center">
+                <div ng-if="confirmFlags.canConfirm">
+                    <md-button
+                        class="md-fab confirm-yes-button"
+                        ng-click="confirm(1)"
+                        aria-label="Report Pile">
+                        {{'views.pile.details.yes' | translate}}
+                    </md-button>
+                    <md-button
+                        class="md-fab confirm-no-button"
+                        ng-click="confirm(0)"
+                        aria-label="Report Pile">
+                        {{'views.pile.details.no' | translate}}
+                    </md-button>
+                </div>
+                <md-button
+                    ng-if="confirmFlags.isConfirmed"
+                    class="confirm-yes-button"
+                    aria-label="Report Pile">
+                    {{'views.pile.details.confirmed' | translate}}
+                </md-button>
+                <md-button
+                    ng-if="confirmFlags.isUnConfirmed"
+                    class="confirm-no-button"
+                    aria-label="Report Pile">
+                    {{'views.pile.details.disregarded' | translate}}
+                </md-button>
+            </div>
+        </div>
+        <div class="item pile-status-holder grey-background">
+            <p style="padding: 5px;">{{'views.pile.details.status' | translate}}<span
+                class="pile-status status-{{ pile.status }}">{{'pile.status.'+pile.status | translate}}</span></p>
+        </div>
+        <pile-size-card size="pile.size" title="{{'views.pile.step2.sizeTitle' | translate}}"></pile-size-card>
+        <div class="card">
+            <div class="item item-text-wrap">
+                <p>{{'views.pile.details.content' | translate}}</p>
+                <md-content layout="row" layout-align="space-between center" class="summary-content">
+                    <p>
+					<span ng-repeat="content in pile.content">
+						{{'views.pile.content.'+content.split(' ').join('') | lowercase | translate}}<span
+                        ng-show="!$last">,</span>
+					</span>
+                    </p>
+
+                </md-content>
+            </div>
+        </div>
+        <div class="card pile-images-holder">
+            <div class="item item-text-wrap">
+                <p>{{'views.pile.details.photos' | translate}}</p>
+                <md-content layout="row" class="no-scroll-y margintop20px">
+                    <div flex data-ng-repeat="image in pile.images">
+                        <a ng-click="zoomImage(image.src)"><img data-ng-src="{{ image.src }}"
+                                                                alt="image{{ $index }}"></a>
+                    </div>
+                </md-content>
+            </div>
+        </div>
+        <div class="card">
+            <div class="item item-text-wrap">
+                <p>{{'views.pile.details.gps' | translate}}</p>
+                <md-content layout="row" layout-align="space-between center" class="summary-content">
+                    <p><span ng-bind-html="pile.location.lat | decToDms:'lat'"></span> <span
+                        ng-bind-html="pile.location.lng | decToDms:'lng'"></span></p>
+                    <md-icon md-svg-icon="img/icons/place.svg"
+                             style="vertical-align: top; margin-top: 10px;"
+                             ui-sref="app.map"></md-icon>
+                </md-content>
+            </div>
+        </div>
+        <div class="card">
+            <div class="item item-text-wrap">
+                <p>{{'views.pile.details.area' | translate}}</p>
+                <md-content layout="row" layout-align="space-between center" class="summary-content">
+                    <div>
+                        <p>
+						<span ng-repeat="area in pile.areas">
+							{{'views.pile.areas.'+area | lowercase | translate}}<span ng-show="!$last">,</span>
+						</span>
+                        </p>
+                    </div>
+                </md-content>
+            </div>
+        </div>
+        <div class="card pile-comments-holder">
+            <div class="item item-text-wrap">
+                <p>
+                    {{ pile.comments.length }}&nbsp<span data-ng-show="pile.comments.length == 1">{{'views.pile.details.comment' | translate}}</span><span
+                    data-ng-show="pile.comments.length != 1">{{'views.pile.step4.comments' | translate}}</span>
+                    <md-button class="md-primary summary-button float-right"
+                               ui-sref="app.pileDetail.comments({id:pile._id})">{{'views.pile.details.commentAdd' |
+                        translate}}
+                    </md-button>
+                </p>
+                <md-content layout="column" layout-align="start start" class="summary-content"
+                            ng-repeat="comment in pile.comments | orderBy: '-created_at'">
+                    <p>{{comment.description}}</p>
+                    <p class="inactive-gray">{{comment.created_at | datefilter}}</p>
+                </md-content>
+
+            </div>
+        </div>
+        <div class="after-last-card"></div>
+    </ion-content>
+</ion-view>

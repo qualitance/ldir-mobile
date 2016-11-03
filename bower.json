@@ -1,0 +1,29 @@
+{
+  "name": "ldr-mobile",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#a01a8c01a7"
+  },
+  "dependencies": {
+    "angular-material": "a8b29647fa",
+    "angular-messages": "1.3.12",
+    "ngCordova": "#6463412ad3",
+    "leaflet.markercluster": "0.4.0",
+    "angular-resource": "1.3.15",
+    "leaflet-pip": "0.1.0",
+    "mdi": "1.0.62-beta",
+    "angulartics": "0.19.0",
+    "raven-js": "~3.5.1",
+    "angular-translate": "~2.11.1",
+    "angular-translate-loader-static-files": "~2.11.1",
+    "ng-file-upload": "^12.2.9",
+    "angular-file-upload": "^2.3.4",
+    "ng-file-upload-shim": "^12.2.9"
+  },
+  "resolutions": {
+    "angular": "^1.3.0 || >1.4.0-beta.0",
+    "angular-sanitize": "1.3.13",
+    "angular-animate": "^1.3.0 || >1.4.0-beta.0",
+    "angular-ui-router": "0.2.13"
+  }
+}

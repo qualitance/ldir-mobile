@@ -1,0 +1,14 @@
+<ion-view title="">
+    <ion-nav-buttons side="left">
+        <button ng-click="goBack()"
+                ng-click-options="{preventDoubleClick: true}"
+                class="button button-icon icon">
+            <md-icon md-svg-icon="img/icons/arrow_back.svg">
+            </md-icon>
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="card md-padding" ng-bind-html="privacy">
+        </div>
+    </ion-content>
+</ion-view>

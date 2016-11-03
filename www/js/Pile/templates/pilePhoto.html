@@ -1,0 +1,8 @@
+<div class="card photo-card" ng-if="test" ng-style="::getBackground(photo.displaySrc)">
+    <div>
+        <div class="photo-controls" ng-if="hasControls">
+        </div>
+        <md-icon ng-if="hasControls" class="delete-photo-icon" md-svg-icon="img/icons/delete.svg"
+                 ng-click="removePhoto()"></md-icon>
+    </div>
+</div>

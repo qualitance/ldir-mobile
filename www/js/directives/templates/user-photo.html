@@ -1,0 +1,7 @@
+<div class="user-photo-holder">
+    <img id="profilePhoto" ng-src="{{user.image.src}}" ng-if="user.image" class="user-photo img-circle"
+         style="background-size: cover" alt=""/>
+    <span data-ng-if="!user.image">
+        <img src="img/icon-small.png" class="user-photo img-circle" alt="logo">
+    </span>
+</div>

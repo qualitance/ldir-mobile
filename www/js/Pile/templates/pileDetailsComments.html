@@ -1,0 +1,36 @@
+<ion-view title="{{'views.pile.comments.pageTitle' | translate}}">
+    <ion-nav-buttons side="left">
+        <button ng-click="goToDetails()"
+                ng-click-options="{preventDoubleClick: true}"
+                class="button button-icon icon">
+            <md-icon md-svg-icon="img/icons/arrow_back.svg">
+            </md-icon>
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button ng-click="addComment()"
+                ng-click-options="{preventDoubleClick: true}"
+                class="button button-icon icon navbar-button">
+            <span>{{'views.pile.comments.save' | translate}}</span>
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="list-inset progress-container">
+            <h4>{{'views.pile.details.commentAdd' | translate}}</h4>
+        </div>
+        <div class="card">
+            <form name="commentForm" id="commentForm" novalidate>
+                <div layout-padding layout="row">
+                    <md-input-container flex>
+                        <label>{{'views.pile.comments.label' | translate}}</label>
+                        <textarea required name="comment" ng-model="data.addedComment" columns="1"></textarea>
+                        <div ng-messages="commentForm.$submitted && commentForm.comment.$error">
+                            <div ng-message="required">{{'errors.required' | translate}}</div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </form>
+        </div>
+    </ion-content>
+</ion-view>
+

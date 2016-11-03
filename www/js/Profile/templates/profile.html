@@ -1,0 +1,222 @@
+<ion-view title="{{'views.profile.title' | translate}}">
+    <ion-nav-buttons side="left">
+        <button ng-click="goBack()"
+                ng-click-options="{preventDoubleClick: true}"
+                class="button button-icon icon">
+            <md-icon md-svg-icon="img/icons/arrow_back.svg">
+            </md-icon>
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button ng-click="save()"
+                ng-click-options="{preventDoubleClick: true}"
+                class="button button-icon icon navbar-button">
+            <span>{{'views.profile.saveButtonLabel' | translate}}</span>
+        </button>
+    </ion-nav-buttons>
+    <ion-content class="grey-background profile-view">
+        <form name="profileForm">
+            <div class="card">
+                <div class="item item-text-wrap">
+                    <md-content layout="row" class="summary-content">
+
+                        <div layout="column" layout-align="center center">
+                            <ldr-user-photo class="logo80 profile-user-photo" user="currentUser"></ldr-user-photo>
+                        </div>
+                        <div flex layout="column">
+                            <md-input-container>
+                                <label>{{'views.auth.registerTab.firstNameLabel' | translate}}</label>
+                                <input name="first_name" ng-model="currentUser.first_name" required ng-maxlength="20"
+                                       ng-pattern="/^[a-zA-Z\s]*$/">
+
+                                <div ng-messages="profileForm.first_name.$error">
+                                    <div ng-message="required">{{'errors.required' | translate}}</div>
+                                    <div ng-message="maxlength">{{'errors.max20Chars' | translate}}</div>
+                                    <div ng-message="pattern">{{'errors.lettersOnly' | translate}}</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container>
+                                <label>{{'views.auth.registerTab.lastNameLabel' | translate}}</label>
+                                <input name="last_name" ng-model="currentUser.last_name" required ng-maxlength="20"
+                                       ng-pattern="/^[a-zA-Z\s]*$/">
+
+                                <div ng-messages="profileForm.last_name.$error">
+                                    <div ng-message="required">{{'errors.required' | translate}}</div>
+                                    <div ng-message="maxlength">{{'errors.max20Chars' | translate}}</div>
+                                    <div ng-message="pattern">{{'errors.lettersOnly' | translate}}</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                    </md-content>
+                </div>
+            </div>
+            <div class="card">
+                <div class="item item-text-wrap">
+                    <md-content layout="column" class="summary-content">
+                        <md-input-container>
+                            <label>Email</label>
+                            <input name="email" type="email" ng-model="currentUser.email" disabled class="text-gray">
+                        </md-input-container>
+                        <md-input-container md-is-error="profileForm.phone.$invalid">
+                            <label>{{'views.profile.phoneLabel' | translate}}</label>
+                            <input name="phone"
+                                   type="tel"
+                                   ng-model="currentUser.phone"
+                                   required
+                                   ng-pattern="phoneRegex"
+                                   ng-maxlength="15"
+                                   ng-minlength="3"
+                            >
+                            <div ng-messages="profileForm.phone.$error">
+                                <div ng-message="required">{{'errors.required' | translate}}</div>
+                                <div ng-message="pattern">{{'errors.numbersOnly' | translate}}</div>
+                                <div ng-message="minlength">{{'errors.phoneNumberShort' | translate}}</div>
+                                <div ng-message="maxlength">{{'errors.phoneNumberLong' | translate}}</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>{{'views.profile.addressLabel' | translate}}</label>
+                            <textarea ng-model="currentUser.address" columns="1"></textarea>
+                        </md-input-container>
+                        <md-input-container>
+                            <label>{{'views.profile.countryLabel' | translate}}</label>
+                            <md-select class="profile-select" name="country" ng-model="country" required
+                                       ng-change="changeCountry(country)"
+                                       placeholder="{{country.name}}">
+                                <md-option ng-value="country" ng-repeat="country in countries">
+                                    {{country.name}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container>
+                            <label>{{'views.profile.countyLabel' | translate}}</label>
+                            <md-select class="profile-select" name="county" ng-model="currentUser.county" required
+                                       placeholder="{{currentUser.county.name}}">
+                                <md-option ng-value="county" ng-repeat="county in counties">
+                                    {{county.name}}
+                                </md-option>
+                            </md-select>
+                            <div ng-messages="profileForm.county.$error">
+                                <div ng-message="required">{{'errors.required' | translate}}</div>
+                            </div>
+                        </md-input-container>
+                    </md-content>
+                </div>
+            </div>
+        </form>
+        <div class="card">
+            <div class="item item-text-wrap">
+                <div layout="column" class="summary-content">
+                    <div layout="row" layout-align="start center" layout-fill style="min-height: 61px">
+                        <md-checkbox
+                            class="profile-checkbox"
+                            ng-model="currentUser.flags.newsletter"
+                            aria-label="newsletter"
+                            layout-fill>
+                            {{'views.profile.emailNotification' | translate}}
+                        </md-checkbox>
+                    </div>
+                    <md-divider></md-divider>
+                    <div layout="row" layout-align="start center" layout-fill style="min-height: 61px">
+                        <md-checkbox
+                            class="profile-checkbox"
+                            ng-model="currentUser.flags.receivePushNotifications"
+                            aria-label="notifications"
+                            layout-fill>
+                            {{'views.profile.receiveNotifications' | translate}}
+                        </md-checkbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" ng-if="currentUser.pass">
+            <md-content layout="column" ng-if="!viewPassForm">
+                <md-button class="md-primary summary-button" aria-label="Change password" ng-click="togglePassForm()"
+                           ng-click-options="{preventDoubleClick: true}">{{'views.profile.changePassword' | translate}}
+                </md-button>
+            </md-content>
+            <div class="item item-text-wrap" ng-if="viewPassForm">
+                <md-content layout="column" class="summary-content">
+                    <form name="passForm">
+                        <section layout="column" layout-margin layout-align="center center">
+                            <md-input-container style="width:100%">
+                                <label>{{'views.profile.currentPassword' | translate}}</label>
+                                <input required type="password" name="oldPass" ng-model="passData.oldPass">
+
+                                <div ng-messages="passForm.$submitted && passForm.oldPass.$error">
+                                    <div ng-message="required">{{'errors.required' | translate}}</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container style="width:100%">
+                                <label>{{'views.profile.newPassword' | translate}}</label>
+                                <input required type="password" name="newPass" ng-model="passData.newPass">
+
+                                <div ng-messages="passForm.$submitted && passForm.newPass.$error">
+                                    <div ng-message="required">{{'errors.required' | translate}}</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container style="width:100%">
+                                <label>{{'views.profile.retypePassword' | translate}}</label>
+                                <input required type="password" name="repass" ng-model="passData.repass"
+                                       ng-change="checkPasswordsMatch(passForm)">
+
+                                <div ng-messages="passForm.$submitted && passForm.repass.$error">
+                                    <div ng-message="required">{{'errors.required' | translate}}</div>
+                                    <div ng-message="noMatch">{{'errors.passwordsMatch' | translate}}</div>
+                                    <div ng-message="samePass">{{'errors.sameNewPassword' | translate}}</div>
+                                </div>
+                            </md-input-container>
+                        </section>
+                        <section layout="row" class="margintop20px" layout-fill layout-align="center center">
+                            <md-button class="md-primary summary-button" aria-label="Register"
+                                       ng-click="changePassword(passForm)"
+                                       ng-click-options="{preventDoubleClick: true}">
+                                {{'views.profile.changePassword' | translate}}
+                            </md-button>
+                        </section>
+                    </form>
+                </md-content>
+            </div>
+        </div>
+        <div class="card" ng-if="!currentUser.pass">
+            <md-content layout="column" ng-if="!viewPassForm">
+                <md-button class="md-primary summary-button" aria-label="Set password" ng-click="togglePassForm()"
+                           ng-click-options="{preventDoubleClick: true}">Set Password
+                </md-button>
+            </md-content>
+            <div class="item item-text-wrap" ng-if="viewPassForm">
+                <md-content layout="column" class="summary-content">
+                    <form name="passForm">
+                        <section layout="column" layout-margin layout-align="center center">
+                            <md-input-container style="width:100%">
+                                <label>{{'views.auth.registerTab.passwordLabel' | translate}}</label>
+                                <input required type="password" name="pass" ng-model="passData.pass">
+
+                                <div ng-messages="passForm.$submitted && passForm.pass.$error">
+                                    <div ng-message="required">{{'errors.required' | translate}}</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container style="width:100%">
+                                <label>{{'views.profile.retypePassword' | translate}}</label>
+                                <input required type="password" name="repass" ng-model="passData.repass"
+                                       ng-change="checkPasswordsMatch(passForm)">
+
+                                <div ng-messages="passForm.$submitted && passForm.repass.$error">
+                                    <div ng-message="required">{{'errors.required' | translate}}</div>
+                                    <div ng-message="noMatch">{{'errors.passwordsMatch' | translate}}</div>
+                                </div>
+                            </md-input-container>
+                        </section>
+                        <section layout="row" class="margintop20px" layout-fill layout-align="center center">
+                            <md-button class="md-primary summary-button" aria-label="Register"
+                                       ng-click="setPassword(passForm)" ng-click-options="{preventDoubleClick: true}">
+                                {{'views.profile.setPassword' | translate}}
+                            </md-button>
+                        </section>
+                    </form>
+                </md-content>
+            </div>
+        </div>
+        <div class="after-last-card"></div>
+    </ion-content>
+</ion-view>

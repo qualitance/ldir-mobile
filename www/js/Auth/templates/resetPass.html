@@ -1,0 +1,47 @@
+<div layout="column" flex class="height100">
+    <div flex="5"></div>
+    <div flex="85">
+        <md-content class="md-padding" style="background: transparent">
+            <div layout="row">
+                <div flex-sm="0" flex-md="20" flex-gt-md="30"></div>
+                <div flex-sm="100" flex-md="60" flex-gt-md="40">
+                    <form name="resetPassForm">
+                        <md-content class="md-padding">
+                            <section ng-if="!resetMailSent" layout="column" layout-margin layout-align="center center">
+                                <h1 class="center-text gray3">{{'views.auth.resetPassword.title' | translate}}</h1>
+                                <md-input-container style="width:100%">
+                                    <label>Email</label>
+                                    <input required name="resetPassEmail" type="email"
+                                           ng-model="resetData.resetPassEmail">
+                                    <div ng-messages="resetPassForm.$submitted && resetPassForm.resetPassEmail.$error">
+                                        <div ng-message="required">{{'errors.standard' | translate}}</div>
+                                        <div ng-message="email">{{'errors.validEmail' | translate}}</div>
+                                    </div>
+                                    <div class="md-placeholder">{{'views.auth.emailExample' | translate}}</div>
+                                </md-input-container>
+                                <section layout="column" layout-fill style="margin-top:2em;"
+                                         layout-align="center center">
+                                    <md-button class="green-button md-raised submit call-to-action login-big-button"
+                                               aria-label="Log In" ng-click="resetPass(resetPassForm)"
+                                               ng-click-options="{preventDoubleClick: true}">
+                                        {{'views.auth.resetPassword.title' | translate}}
+                                    </md-button>
+                                </section>
+                            </section>
+                            <section ng-if="resetMailSent">
+                                <h1 class="center-text">{{'views.auth.resetPassword.title' | translate}}</h1>
+                            </section>
+                            <section layout="row" layout-align="center center" class="margintop15px">
+                                <md-button ui-sref="auth.login" class="gray3 md-primary login-big-button">
+                                    {{'views.auth.resetPassword.backToLogin' | translate}}
+                                </md-button>
+                            </section>
+                        </md-content>
+                    </form>
+                </div>
+                <div flex-sm="0" flex-md="20" flex-gt-md="30"></div>
+            </div>
+        </md-content>
+    </div>
+    <div flex="10"></div>
+</div>

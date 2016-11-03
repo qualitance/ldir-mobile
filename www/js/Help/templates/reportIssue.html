@@ -1,0 +1,46 @@
+<ion-view title="{{'views.reportIssue.title' | translate}}">
+    <ion-nav-buttons side="left">
+        <button ng-click="goBack()"
+                ng-click-options="{preventDoubleClick: true}"
+                class="button button-icon icon">
+            <md-icon md-svg-icon="img/icons/arrow_back.svg">
+            </md-icon>
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button ng-click="report()"
+                ng-click-options="{preventDoubleClick: true}"
+                class="button button-icon icon navbar-button">
+            <span>{{'views.reportIssue.sendLabel' | translate}}</span>
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="card">
+            <form name="reportIssueForm" id="reportIssueForm" ng-submit="reportIssueForm.$valid && report()">
+                <md-content class="md-padding">
+                    <md-input-container md-is-error="reportIssueForm.$submitted && reportIssueForm.title.$invalid" flex>
+                        <label>{{'views.reportIssue.titleLabel' | translate}}</label>
+                        <input required name="title" type="text" ng-model="issue.message" ng-minlength="3"
+                               ng-maxlength="20">
+                        <div ng-messages="reportIssueForm.$submitted && reportIssueForm.title.$error">
+                            <div ng-message="required">{{'errors.required' | translate}}</div>
+                            <div ng-message="minlength">{{'errors.min3Chars' | translate}}</div>
+                            <div ng-message="maxlength">{{'errors.max20Chars' | translate}}</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container md-is-error="reportIssueForm.$submitted && reportIssueForm.description.$invalid"
+                                        flex>
+                        <label>{{'views.reportIssue.descriptionLabel' | translate}}</label>
+                        <textarea required name="description" ng-model="issue.description" columns="1" ng-minlength="10"
+                                  ng-maxlength="99"></textarea>
+                        <div ng-messages="reportIssueForm.$submitted && reportIssueForm.description.$error">
+                            <div ng-message="required">{{'errors.required' | translate}}</div>
+                            <div ng-message="minlength">{{'errors.min10Chars' | translate}}</div>
+                            <div ng-message="maxlength">{{'errors.max20Chars' | translate}}</div>
+                        </div>
+                    </md-input-container>
+                </md-content>
+            </form>
+        </div>
+    </ion-content>
+</ion-view>

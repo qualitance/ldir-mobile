@@ -1,0 +1,20 @@
+<md-dialog aria-label="Verify email">
+    <md-dialog-content ng-if="additionalData.status == 'pending'">
+        <h2 class="md-title">{{'dialogs.verifyEmail.accountNotVerifiedTitle' | translate}}</h2>
+        <p>{{'dialogs.verifyEmail.accountNotVerifiedText' | translate}}</p>
+    </md-dialog-content>
+    <md-dialog-content ng-if="additionalData.status == 'inactive'">
+        <h2 class="md-title">{{'dialogs.verifyEmail.accountInactiveTitle' | translate}}</h2>
+        <p>{{'dialogs.verifyEmail.accountInactiveText' | translate}}
+            <a href="mailto:{{additionalData.admin}}">{{additionalData.admin}}</a>
+        </p>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="hide()" class="md-primary">
+            {{'buttons.close' | translate}}
+        </md-button>
+        <md-button ng-if="additionalData.status == 'pending'" ng-click="resendEmail()" class="md-primary">
+            {{'dialogs.verifyEmail.resend' | translate}}
+        </md-button>
+    </div>
+</md-dialog>

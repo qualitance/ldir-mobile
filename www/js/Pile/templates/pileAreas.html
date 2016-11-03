@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="item item-text-wrap">
+        <p>{{'views.pile.areas.title' | translate}}</p>
+        <div layout="column">
+            <md-checkbox ng-model="areas.checkCity" aria-label="city"
+                         ng-change="updateAreaList(areas.checkCity, 'city')">{{'views.pile.areas.city' | translate}}
+            </md-checkbox>
+            <md-checkbox ng-model="areas.checkForest" aria-label="forest"
+                         ng-change="updateAreaList(areas.checkForest, 'forest')">{{'views.pile.areas.forest' |
+                translate}}
+            </md-checkbox>
+            <md-checkbox ng-model="areas.checkField" aria-label="field"
+                         ng-change="updateAreaList(areas.checkField, 'field')">{{'views.pile.areas.field' | translate}}
+            </md-checkbox>
+            <md-checkbox ng-model="areas.checkWater" aria-label="water"
+                         ng-change="updateAreaList(areas.checkWater, 'water')">{{'views.pile.areas.water' | translate}}
+            </md-checkbox>
+            <md-checkbox ng-model="areas.checkOther" aria-label="other"
+                         ng-change="updateAreaList(areas.checkOther, 'other')">{{'views.pile.areas.other' | translate}}
+            </md-checkbox>
+        </div>
+    </div>
+</div>
