@@ -1,3 +1,10 @@
+/**
+ * @ngdoc filter
+ * @name datefilter
+ * @description  Formats the date to today, yesterday or on specific date
+ * @example
+ *  <pre><p>{{comment.created_at | datefilter}}</p></pre>
+ */
 angular.module('starter').filter('datefilter', function ($translate) {
 
     return function (input) {
@@ -31,6 +38,13 @@ angular.module('starter').filter('datefilter', function ($translate) {
     }
 });
 
+/**
+ * @ngdoc filter
+ * @name decToDms
+ * @description  Formats pile coordinates
+ * @example
+ *  <pre><span ng-bind-html="pile.location.lat | decToDms:'lat'"></pre>
+ */
 angular.module('starter').filter('decToDms', ['$sce', function ($sce) {
     return function (input, latlng) {
 
