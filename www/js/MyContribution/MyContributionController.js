@@ -1,3 +1,27 @@
+/**
+ * @ngdoc controller
+ * @name MyContributionController
+ * @description my contribution page controller
+ * @property {Integer} reportedPage - user's reported piles page to request
+ * @property {Integer} contributedPage - user's contributed piles page to request
+ * @property {Integer} limit - piles limit to request
+ * @property {Array} reportedPiles - reported piles array
+ * @property {Array} contributedPiles - contributed piles array
+ * @property {Boolean} loadedAllReported - finished loading reported piles flag
+ * @property {Boolean} loadedAllContributed - finished contributed reported piles flag
+ * @requires $scope
+ * @requires $rootScope
+ * @requires navbarSetup
+ * @requires $state
+ * @requires appConfig
+ * @requires Pile
+ * @requires $mdToast
+ * @requires Pile
+ * @requires $mdToast
+ * @requires $cordovaSpinnerDialog
+ * @requires $ionicViewSwitcher
+ * @requires $translate
+ */
 angular.module('MyContributionModule').controller('MyContributionController', ['$scope', '$rootScope', 'navbarSetup',
     '$state', 'appConfig', 'Pile', '$mdToast', '$cordovaSpinnerDialog', '$ionicViewSwitcher', '$translate',
     function ($scope, $rootScope, navbarSetup,
@@ -23,6 +47,14 @@ angular.module('MyContributionModule').controller('MyContributionController', ['
             $scope.getContributedPiles();
         };
 
+        /**
+         * @ngdoc
+         * @name MyContributionController#getReportedPiles
+         * @methodOf MyContributionController
+         * @param {Boolean} reload - clear piles array and reload flag
+         * @description
+         * gets user's reported piles
+         */
         $scope.getReportedPiles = function (reload) {
 
             if (!$scope.reportedPiles) {
@@ -84,6 +116,14 @@ angular.module('MyContributionModule').controller('MyContributionController', ['
                 });
         };
 
+        /**
+         * @ngdoc
+         * @name MyContributionController#getContributedPiles
+         * @methodOf MyContributionController
+         * @param {Boolean} reload - clear piles array and reload flag
+         * @description
+         * gets user's contributed piles
+         */
         $scope.getContributedPiles = function (reload) {
 
             if (!$scope.contributedPiles) {
@@ -140,10 +180,28 @@ angular.module('MyContributionModule').controller('MyContributionController', ['
                 });
         };
 
+        /**
+         * @ngdoc
+         * @name MyContributionController#goToDetail
+         * @methodOf MyContributionController
+         * @example
+         * <pre><button ng-click="goToDetail()">...</button></pre>
+         * @description
+         * redirects to pile details view
+         */
         $scope.goToDetail = function (pileId) {
             $state.go('app.pileDetail.details', {id: pileId});
         };
 
+        /**
+         * @ngdoc
+         * @name MyContributionController#goBack
+         * @methodOf MyContributionController
+         * @example
+         * <pre><button ng-click="goBack()">...</button></pre>
+         * @description
+         * redirects to map view
+         */
         $scope.goBack = function () {
             $ionicViewSwitcher.nextDirection('back');
             $state.go('app.map');
