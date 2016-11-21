@@ -1,3 +1,37 @@
+/**
+ * @ngdoc controller
+ * @name MapController
+ * @description map page controller
+ * @property {Object} mapData - map configuration object
+ * @property {Object} mapData - map object containing markers, pile icons, center coordinates, layers options
+ * @property {Boolean} initPerformed - flag for init already performed
+ * @property {Boolean} downloadingMap - flag for download process started
+ * @property {Boolean} downloadMode - flag for download view
+ * @property {String} viewTitle - page title
+ * @requires $scope
+ * @requires $cordovaGeolocation
+ * @requires $stateParams
+ * @requires $ionicModal
+ * @requires $ionicPopup
+ * @requires $mdSidenav
+ * @requires $mdToast
+ * @requires Pile
+ * @requires appConfig
+ * @requires navbarSetup
+ * @requires leafletData
+ * @requires PilePopupDialog
+ * @requires $rootScope
+ * @requires $state
+ * @requires LocationDialog
+ * @requires AuthService
+ * @requires LocalStorageService
+ * @requires $ionicPlatform
+ * @requires $timeout
+ * @requires $cordovaSpinnerDialog
+ * @requires leafletBoundsHelpers
+ * @requires $translate
+ * @requires MarkerHelperService
+ */
 angular.module('MapModule').controller('MapController',
     ['$scope',
         '$cordovaGeolocation',
@@ -83,7 +117,6 @@ angular.module('MapModule').controller('MapController',
             var self = this;
             self.mapTilesUrl = appConfig.mapServerUrl + appConfig.mapboxToken;
 
-            // INIT MAP
             $scope.init = function () {
 
                 navbarSetup.setBar({}, {});
@@ -99,7 +132,6 @@ angular.module('MapModule').controller('MapController',
                     $scope.downloadMode = false;
                     $scope.viewTitle = 'Let\'s Do It';
                 }
-                // prepare view for download mode
                 $scope.$on('$stateChangeSuccess', function () {
                     if ($state.includes('app.map')) {
                         if ($state.params.download) {
@@ -199,7 +231,13 @@ angular.module('MapModule').controller('MapController',
                 self.prepareOffline();
             };
 
-            // PREPARE OFFLINE CACHING
+            /**
+             * @ngdoc
+             * @name MapController#prepareOffline
+             * @methodOf MapController
+             * @description
+             * prepare offline use
+             */
             self.prepareOffline = function () {
 
                 leafletData.getMap().then(function (aMap) {
@@ -239,7 +277,14 @@ angular.module('MapModule').controller('MapController',
                 });
             };
 
-            // Locate after piles are loaded in order to maintain performance on slow devices and keep the processor overhead to functional limit
+            /**
+             * @ngdoc
+             * @name MapController#loadPiles
+             * @methodOf MapController
+             * @param {Boolean} locateOnLoad - flag to trigger locate
+             * @description
+             * Gets all piles, then configures markers. If markers already drawn, updates only new markers or updated markers.
+             */
             $scope.loadPiles = function (locateOnLoad) {
 
                 if (appConfig.isMobile) {
@@ -251,7 +296,6 @@ angular.module('MapModule').controller('MapController',
                                 $scope.map.newMarkers = {};
                                 var allMarkers = false;
 
-                                //if no markers load all, else add new ones
                                 if (Object.keys($scope.map.markers).length === 0) {
                                     allMarkers = true;
                                     var temp = [];
@@ -326,10 +370,15 @@ angular.module('MapModule').controller('MapController',
             };
 
             /**
-             * Center map on user's current position
+             * @ngdoc
+             * @name MapController#locate
+             * @methodOf MapController
+             * @example
+             * <pre><md-button ng-click="locate()" class="md-fab position-button" aria-label="My Position"></md-button></pre>
+             * @description
+             * Centers map on pile location or prepares for getting device location
              */
             $scope.locate = function () {
-                // LOCATE ONLY WHEN NO COORDS ARE SPECIFIED
                 if (!$rootScope.pileLocation) {
                     if ($rootScope.platformReady) {
                         prepareLocation();
@@ -343,6 +392,13 @@ angular.module('MapModule').controller('MapController',
                 }
             };
 
+            /**
+             * @ngdoc
+             * @name MapController#prepareLocation
+             * @methodOf MapController
+             * @description
+             * prepare device for getting location
+             */
             function prepareLocation() {
                 var posOptions = {timeout: 10000, enableHighAccuracy: false};
                 if (!appConfig.isIos) {
@@ -364,6 +420,14 @@ angular.module('MapModule').controller('MapController',
                 }
             }
 
+            /**
+             * @ngdoc
+             * @name MapController#prepareLocation
+             * @methodOf MapController
+             * @param {Boolean} posOptions - plugin options object
+             * @description
+             * centers map on device position
+             */
             function getLocation(posOptions) {
                 $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
                     $scope.gettingPosition = false;
@@ -388,7 +452,12 @@ angular.module('MapModule').controller('MapController',
             }
 
             /**
-             * Center map on user's current position
+             * @ngdoc
+             * @name MapController#goToCoords
+             * @methodOf MapController
+             * @param {Boolean} coords - coordinates object
+             * @description
+             * centers map on given coordinates
              */
             $scope.goToCoords = function (coords) {
                 $scope.map.center.lat = coords.lat;
@@ -397,6 +466,13 @@ angular.module('MapModule').controller('MapController',
                 $rootScope.pileLocation = null;
             };
 
+            /**
+             * @ngdoc
+             * @name MapController#checkRedirects
+             * @methodOf MapController
+             * @description
+             * redirects to auth or profile completion if missing token or profile not complete
+             */
             $scope.checkRedirects = function () {
                 var token = LocalStorageService.get('token');
                 if (token === undefined || token == null) {
@@ -415,6 +491,13 @@ angular.module('MapModule').controller('MapController',
                 }
             };
 
+            /**
+             * @ngdoc
+             * @name MapController#reportPile
+             * @methodOf MapController
+             * @description
+             * redirect to pile creation view
+             */
             $scope.reportPile = function () {
 
                 var countyLayer = CountyService.getCounties();
@@ -428,9 +511,14 @@ angular.module('MapModule').controller('MapController',
                 }
             };
 
-            // OFFLINE MAP FUNCTIONALITY
+            /**
+             * @ngdoc
+             * @name MapController#downloadOffline
+             * @methodOf MapController
+             * @description
+             * clear saved tiles then download map tiles for offline use if zoom level is adequate
+             */
             $scope.downloadOffline = function () {
-                // CLEAR PREVIOUS SAVED TILES BEFORE STORING NEW ONES
                 LocalStorageService.setObject('offlineCoordinates', $scope.map.center);
                 offlineLayer.clearTiles(function () {
 
