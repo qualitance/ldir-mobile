@@ -1,3 +1,28 @@
+/**
+ * @ngdoc controller
+ * @name AuthController
+ * @description authentication page controller
+ * @property {Object} user - current user
+ * @property {Object} newUser - user to register
+ * @property {Object} resetData - recovery data
+ * @property {Boolean} loggingInWithFB - flag for login/facebook login
+ * @requires $scope
+ * @requires appConfig
+ * @requires LocalStorageService
+ * @requires TermsDialog
+ * @requires VerifyEmailDialog
+ * @requires $rootScope
+ * @requires $state
+ * @requires $cordovaDialogs
+ * @requires $cordovaSpinnerDialog
+ * @requires $cordovaFacebook
+ * @requires PushNotificationService
+ * @requires User
+ * @requires $mdDialog
+ * @requires $ionicScrollDelegate
+ * @requires PrivacyDialog
+ * @requires $translate
+ */
 angular.module('AuthModule').controller('AuthController', ['$scope', 'AuthService', 'appConfig', 'LocalStorageService',
     'TermsDialog', 'VerifyEmailDialog', '$rootScope', '$state', '$cordovaDialogs', '$cordovaSpinnerDialog',
     '$cordovaFacebook', 'PushNotificationService', 'User', '$mdDialog', '$ionicScrollDelegate', 'PrivacyDialog',
@@ -18,6 +43,16 @@ angular.module('AuthModule').controller('AuthController', ['$scope', 'AuthServic
             $scope.loggingInWithFB = false;
         };
 
+        /**
+         * @ngdoc
+         * @name AuthController#login
+         * @methodOf AuthController
+         * @example
+         * <pre><md-button ng-click="login(loginForm)">Login</md-button></pre>
+         * @param {object} form - login form
+         * @description
+         * login with normal user
+         */
         $scope.login = function (form) {
 
             form.$setSubmitted();
@@ -99,6 +134,16 @@ angular.module('AuthModule').controller('AuthController', ['$scope', 'AuthServic
             }
         };
 
+        /**
+         * @ngdoc
+         * @name AuthController#register
+         * @methodOf AuthController
+         * @example
+         * <pre><md-button ng-click="register(registerForm)">Register</md-button></pre>
+         * @param {object} form - register form
+         * @description
+         * register with new user
+         */
         $scope.register = function (form) {
             form.$setSubmitted();
             if (form.$valid) {
@@ -152,6 +197,15 @@ angular.module('AuthModule').controller('AuthController', ['$scope', 'AuthServic
             }
         };
 
+        /**
+         * @ngdoc
+         * @name AuthController#facebookLogin
+         * @methodOf AuthController
+         * @example
+         * <pre><md-button ng-click="facebookLogin()">Login</md-button></pre>
+         * @description
+         * login with facebook account
+         */
         $scope.facebookLogin = function () {
 
             var deviceType = (appConfig.isMobile && appConfig.isIos) ? 'ios' : 'android';
@@ -230,6 +284,16 @@ angular.module('AuthModule').controller('AuthController', ['$scope', 'AuthServic
                 });
         };
 
+        /**
+         * @ngdoc
+         * @name AuthController#checkPasswordsMatch
+         * @methodOf AuthController
+         * @example
+         * <pre><input required type="password" name="repass"ng-model="newUser.repass" ng-change="checkPasswordsMatch(registerForm)"/></pre>
+         * @param {object} form - reset password form
+         * @description
+         * check if entered passwords match, sets form validity
+         */
         $scope.checkPasswordsMatch = function (form) {
             if ($scope.newUser.pass !== $scope.newUser.repass) {
                 form.repass.$setValidity('noMatch', false);
@@ -239,6 +303,16 @@ angular.module('AuthModule').controller('AuthController', ['$scope', 'AuthServic
             }
         };
 
+        /**
+         * @ngdoc
+         * @name AuthController#resetPass
+         * @methodOf AuthController
+         * @example
+         * <pre><md-button ng-click="resetPass(resetPassForm)">Reset password</md-button></pre>
+         * @param {object} form - reset password form
+         * @description
+         * sends reset password email
+         */
         $scope.resetPass = function (form) {
             form.$setSubmitted();
             if (form.$valid) {
@@ -274,10 +348,31 @@ angular.module('AuthModule').controller('AuthController', ['$scope', 'AuthServic
             }
         };
 
+        /**
+         * @ngdoc
+         * @name AuthController#showTerms
+         * @methodOf AuthController
+         * @example
+         * <pre><a ng-click="showTerms($event)">{{'views.auth.termsLink' | translate}}</a></pre>
+         * @param {object} event - event object
+         * @description
+         * shows terms and conditions dialog
+         */
         $scope.showTerms = function (event) {
             TermsDialog.show(event);
         };
 
+        /**
+         * @ngdoc
+         * @name AuthController#showPrivacy
+         * @methodOf AuthController
+         * @example
+         * <pre><a
+         ng-click="showPrivacy($event)">{{'views.auth.privacyLink' | translate}}</a></pre>
+         * @param {object} event - event object
+         * @description
+         * shows privacy dialog
+         */
         $scope.showPrivacy = function (event) {
             PrivacyDialog.show(event);
         };
