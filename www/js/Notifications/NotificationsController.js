@@ -1,3 +1,21 @@
+/**
+ * @ngdoc controller
+ * @name NotificationsController
+ * @description notifications page controller
+ * @property {Array} notifications - array containing notifications objects
+ * @property {Boolean} loadedAll - flag
+ * @property {Integer} page - notification page to request
+ * @property {Integer} limit - notifications limit per page
+ * @requires $scope
+ * @requires $rootScope
+ * @requires navbarSetup
+ * @requires appConfig
+ * @requires Activity
+ * @requires $mdToast
+ * @requires $cordovaSpinnerDialog
+ * @requires $ionicViewSwitcher
+ * @requires $translate
+ */
 angular.module('NotificationsModule').controller('NotificationsController', ['$scope', '$rootScope', 'navbarSetup',
     '$state', 'appConfig', 'Activity', '$mdToast', '$cordovaSpinnerDialog', '$ionicViewSwitcher', '$translate',
     function ($scope, $rootScope, navbarSetup,
@@ -15,13 +33,20 @@ angular.module('NotificationsModule').controller('NotificationsController', ['$s
             $scope.loadedAll = false;
             $scope.page = 1;
             $scope.limit = 20;
-            $scope.hasInit = true;
 
             loadingInProgress = false;
 
             $scope.getNotifications();
         };
 
+        /**
+         * @ngdoc
+         * @name NotificationsController#getNotifications
+         * @methodOf NotificationsController
+         * @param {Boolean} reload - clear notification array and reload flag
+         * @description
+         * gets user's notifications
+         */
         $scope.getNotifications = function (reload) {
 
             if (!$scope.notifications) {
@@ -86,20 +111,29 @@ angular.module('NotificationsModule').controller('NotificationsController', ['$s
                 });
         };
 
-        $scope.getActionPrefix = function (activity) {
-
-            switch (activity.verb) {
-                case 'comment' :
-                    return 'New comment was added';
-                default:
-                    return 'The state';
-            }
-        };
-
+        /**
+         * @ngdoc
+         * @name NotificationsController#goToDetail
+         * @methodOf NotificationsController
+         * @example
+         * <pre><button ng-click="goToDetail()">...</button></pre>
+         * @param {String} pileId - pile's id
+         * @description
+         * redirects to pile details view
+         */
         $scope.goToDetail = function (pileId) {
             $state.go('app.pileDetail.details', {id: pileId});
         };
 
+        /**
+         * @ngdoc
+         * @name NotificationsController#goBack
+         * @methodOf NotificationsController
+         * @example
+         * <pre><button ng-click="goBack()">...</button></pre>
+         * @description
+         * redirects to map view
+         */
         $scope.goBack = function () {
             $ionicViewSwitcher.nextDirection('back');
             $state.go('app.map');

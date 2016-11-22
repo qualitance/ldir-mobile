@@ -186,6 +186,7 @@ angular.module('MyContributionModule').controller('MyContributionController', ['
          * @methodOf MyContributionController
          * @example
          * <pre><button ng-click="goToDetail()">...</button></pre>
+         * @param {String} pileId - pile's id
          * @description
          * redirects to pile details view
          */
