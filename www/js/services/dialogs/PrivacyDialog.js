@@ -1,4 +1,13 @@
 angular.module('ServicesModule')
+    /**
+     * @ngdoc service
+     * @service
+     * @name PrivacyDialog
+     * @description privacy dialog service
+     * @requires appConfig
+     * @requires $mdDialog
+     * @requires $translate
+     */
     .service('PrivacyDialog', ['appConfig', '$mdDialog', '$translate',
         function (appConfig, $mdDialog, $translate) {
 
@@ -12,6 +21,15 @@ angular.module('ServicesModule')
                 }
             };
 
+            /**
+             * @ngdoc controller
+             * @name PrivacyDialogController
+             * @description privacy dialog controller
+             * @requires $scope
+             * @requires $mdDialog
+             * @requires $http
+             * @requires appConfig
+             */
             function PrivacyDialogController($scope, $mdDialog, $http, appConfig) {
 
                 $scope.init = function () {

@@ -1,4 +1,17 @@
 angular.module('ServicesModule')
+    /**
+     * @ngdoc service
+     * @service
+     * @name VerifyEmailDialog
+     * @description verify email dialog service
+     * @requires appConfig
+     * @requires $mdDialog
+     * @requires AuthService
+     * @requires $cordovaSpinnerDialog
+     * @requires $cordovaDialogs
+     * @requires $translate
+     * @requires $mdToast
+     */
     .service('VerifyEmailDialog', ['appConfig', '$mdDialog', 'AuthService', '$cordovaSpinnerDialog', '$cordovaDialogs',
         '$translate', '$mdToast',
         function (appConfig, $mdDialog, AuthService, $cordovaSpinnerDialog, $cordovaDialogs, $translate, $mdToast) {
@@ -21,6 +34,16 @@ angular.module('ServicesModule')
                 }
             };
 
+            /**
+             * @ngdoc controller
+             * @name VerifyEmailDialogController
+             * @description terms dialog controller
+             * @property {Object} email - user email object
+             * @property {Object} additionalData - additional data object
+             * @requires $scope
+             * @requires email
+             * @requires additionalData
+             */
             function VerifyEmailDialogController($scope, email, additionalData) {
 
                 $scope.email = email || {};
@@ -35,6 +58,15 @@ angular.module('ServicesModule')
                     $mdDialog.cancel();
                 };
 
+                /**
+                 * @ngdoc
+                 * @name VerifyEmailDialogController#resendEmail
+                 * @methodOf VerifyEmailDialogController
+                 * @example
+                 * <pre><md-button ng-click="resendEmail()"></md-button></pre>
+                 * @description
+                 * resends activation email
+                 */
                 $scope.resendEmail = function () {
                     if (appConfig.isMobile) {
                         $cordovaSpinnerDialog.show($translate.instant('dialogs.verifyEmail.success'));

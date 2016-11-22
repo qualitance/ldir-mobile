@@ -1,4 +1,12 @@
 angular.module('ServicesModule')
+    /**
+     * @ngdoc service
+     * @service
+     * @name LocationDialog
+     * @description Location enable dialog service
+     * @requires appConfig
+     * @requires $mdDialog
+     */
     .service('LocationDialog', ['appConfig', '$mdDialog',
         function (appConfig, $mdDialog) {
 
@@ -12,8 +20,22 @@ angular.module('ServicesModule')
                 }
             };
 
+            /**
+             * @ngdoc controller
+             * @name LocationDialogController
+             * @description enable location dialog controller
+             * @requires $scope
+             * @requires $mdDialog
+             */
             function LocationDialogController($scope, $mdDialog) {
 
+                /**
+                 * @ngdoc
+                 * @name LocationDialogController#switchToLocationSettings
+                 * @methodOf LocationDialogController
+                 * @description
+                 * redirects to device location settings
+                 */
                 $scope.switchToLocationSettings = function () {
                     cordova.require('com.neton.cordova.diagnostic.diagnostic').switchToLocationSettings(function () {
                     });
