@@ -1,9 +1,34 @@
+/**
+ * @ngdoc service
+ * @service
+ * @name PushNotificationService
+ * @description The push notification service
+ * @requires appConfig
+ * @requires $cordovaPush
+ * @requires $q
+ * @requires $http
+ * @requires AuthService
+ * @requires LocalStorageService
+ * @requires $mdDialog
+ * @requires $timeout
+ * @requires $translate
+ */
 angular.module('ServicesModule').factory('PushNotificationService', ['appConfig', '$cordovaPush', '$rootScope', '$q',
     '$http', 'AuthService', 'LocalStorageService', '$mdDialog', '$timeout', '$translate',
     function (appConfig, $cordovaPush, $rootScope, $q,
               $http, AuthService, LocalStorageService, $mdDialog, $timeout, $translate) {
         var flag = true;
 
+        /**
+         * @ngdoc
+         * @name PushNotificationService#subscribe
+         * @methodOf PushNotificationService
+         * @param {String} deviceType - device type
+         * @param {String} deviceToken - device token
+         * @description
+         * subscribe device to push notifications
+         * @returns {Promise} Resolves to an empty response/error
+         */
         var subscribe = function (deviceType, deviceToken) {
 
             var deferred = $q.defer(),
@@ -33,6 +58,16 @@ angular.module('ServicesModule').factory('PushNotificationService', ['appConfig'
 
         };
 
+        /**
+         * @ngdoc
+         * @name PushNotificationService#unsubscribe
+         * @methodOf PushNotificationService
+         * @param {String} deviceType - device type
+         * @param {String} deviceToken - device token
+         * @description
+         * unsubscribe device to push notifications
+         * @returns {Promise} Resolves to an empty response/error
+         */
         var unsubscribe = function (deviceToken) {
             var deferred = $q.defer(),
                 deferredResponse = {};

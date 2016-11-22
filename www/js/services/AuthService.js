@@ -1,9 +1,32 @@
+/**
+ * @ngdoc service
+ * @service
+ * @name AuthService
+ * @description The authentication service
+ * @requires $log
+ * @requires $http
+ * @requires $q
+ * @requires appConfig
+ * @requires appConfig
+ * @requires $rootScope
+ * @requires $translate
+ */
 angular.module('ServicesModule').service('AuthService', ['$log', '$http', '$q', 'appConfig', 'LocalStorageService',
     '$rootScope', '$translate',
     function ($log, $http, $q, appConfig, LocalStorageService, $rootScope, $translate) {
 
         var _authService = {};
 
+        /**
+         * @ngdoc
+         * @name AuthService#login
+         * @methodOf AuthService
+         * @example
+         * AuthService.login(email, password);
+         * @description
+         * Tries to login a user
+         * @returns {Promise} Resolves to an empty response/error
+         */
         _authService.login = function (email, password) {
 
             var deferred = $q.defer(),
@@ -48,6 +71,16 @@ angular.module('ServicesModule').service('AuthService', ['$log', '$http', '$q', 
             return deferred.promise;
         };
 
+        /**
+         * @ngdoc
+         * @name AuthService#register
+         * @methodOf AuthService
+         * @example
+         * AuthService.register(firstName, lastName, email, password);
+         * @description
+         * Tries to register a user
+         * @returns {Promise} Resolves to an empty response/error
+         */
         _authService.register = function (firstName, lastName, email, pass) {
             var deferred = $q.defer(),
                 deferredResponse = {};
@@ -85,6 +118,16 @@ angular.module('ServicesModule').service('AuthService', ['$log', '$http', '$q', 
             return deferred.promise;
         };
 
+        /**
+         * @ngdoc
+         * @name AuthService#fbLogin
+         * @methodOf AuthService
+         * @example
+         * AuthService.fbLogin(userId, accessToken);
+         * @description
+         * Tries to login a user with facebook
+         * @returns {Promise} Resolves to an empty response/error
+         */
         _authService.fbLogin = function (userId, accessToken) {
 
             var deferred = $q.defer(),
@@ -113,6 +156,16 @@ angular.module('ServicesModule').service('AuthService', ['$log', '$http', '$q', 
             return deferred.promise;
         };
 
+        /**
+         * @ngdoc
+         * @name AuthService#resetPass
+         * @methodOf AuthService
+         * @example
+         * AuthService.resetPass(email);
+         * @description
+         * Tries to resets a user password
+         * @returns {Promise} Resolves to an empty response/error
+         */
         _authService.resetPass = function (email) {
 
             var deferred = $q.defer(),
@@ -150,6 +203,16 @@ angular.module('ServicesModule').service('AuthService', ['$log', '$http', '$q', 
             return deferred.promise;
         };
 
+        /**
+         * @ngdoc
+         * @name AuthService#resendActivation
+         * @methodOf AuthService
+         * @example
+         * AuthService.resendActivation(email);
+         * @description
+         * Tries to resend activation email
+         * @returns {Promise} Resolves to an empty response/error
+         */
         _authService.resendActivation = function (email) {
 
             var deferred = $q.defer(),
@@ -193,6 +256,14 @@ angular.module('ServicesModule').service('AuthService', ['$log', '$http', '$q', 
             return LocalStorageService.get('token', null) !== null;
         };
 
+        /**
+         * @ngdoc
+         * @name AuthService#hasProfileComplete
+         * @methodOf AuthService
+         * @example
+         * AuthService.hasProfileComplete();
+         * @returns {Boolean} Returns true if user has profile complete
+         */
         _authService.hasProfileComplete = function () {
 
             var user = _authService.getCurrentUser();

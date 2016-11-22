@@ -1,4 +1,12 @@
 angular.module('ServicesModule')
+    /**
+     * @ngdoc service
+     * @service
+     * @name Activity
+     * @description The activity service
+     * @requires $resource
+     * @requires appConfig
+     */
     .service('Activity', ['$resource', 'appConfig', function ($resource, appConfig) {
         'use strict';
         return $resource(appConfig.serverUrl + 'activities/:action', {}, {

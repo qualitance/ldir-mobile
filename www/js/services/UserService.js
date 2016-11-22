@@ -1,4 +1,12 @@
 angular.module('ServicesModule')
+    /**
+     * @ngdoc service
+     * @service
+     * @name User
+     * @description The user service
+     * @requires $resource
+     * @requires appConfig
+     */
     .factory('User', ['$resource', 'appConfig', function ($resource, appConfig) {
         return $resource(appConfig.serverUrl + 'users/:action', {},
             {

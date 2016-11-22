@@ -1,4 +1,12 @@
 angular.module('ServicesModule')
+    /**
+     * @ngdoc service
+     * @service
+     * @name Pile
+     * @description The pile service
+     * @requires $resource
+     * @requires appConfig
+     */
     .service('Pile', ['$resource', 'appConfig', function ($resource, appConfig) {
         return $resource(appConfig.serverUrl + 'piles/:action', {}, {
             query: {method: 'GET', isArray: true},

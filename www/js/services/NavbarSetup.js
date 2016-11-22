@@ -1,9 +1,24 @@
+/**
+ * @ngdoc service
+ * @service
+ * @name navbarSetup
+ * @description navbar setup service
+ * @requires $window
+ */
 angular.module('ServicesModule').factory('navbarSetup', ['$rootScope', function ($rootScope) {
 
     return {
+        /**
+         * @ngdoc method
+         * @name navbarSetup#setBar
+         * @methodOf navbarSetup
+         * @description
+         * configures navbar
+         * @param {object} left - left side config object
+         * @param {object} right - right side config object
+         */
         setBar: function (left, right) {
 
-            // SET LEFT SIDE
             if (!left.action) {
                 $rootScope.leftNavbarSide = {hasAction: false};
             }
@@ -26,7 +41,6 @@ angular.module('ServicesModule').factory('navbarSetup', ['$rootScope', function 
                     };
                 }
             }
-            // SET RIGHT SIDE
             if (!right.action) {
                 $rootScope.rightNavbarSide = {hasAction: false};
             }
