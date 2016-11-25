@@ -7,7 +7,7 @@
  * @requires $http
  * @requires $q
  * @requires appConfig
- * @requires appConfig
+ * @requires LocalStorageService
  * @requires $rootScope
  * @requires $translate
  */
