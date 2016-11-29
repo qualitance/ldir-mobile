@@ -139,7 +139,7 @@ angular.module('PileModule').controller('Step1Controller', ['$scope', '$rootScop
          * @ngdoc
          * @name Step1Controller#uploadPhoto
          * @methodOf Step1Controller
-         * <pre><md-button ng-click="uploadPhoto()">Take Photo</md-button></pre>
+         * @example <pre><md-button ng-click="uploadPhoto()">Upload Photo</md-button></pre>
          * @description
          * calls camera plugin to get pictures objects from gallery
          */
@@ -172,7 +172,7 @@ angular.module('PileModule').controller('Step1Controller', ['$scope', '$rootScop
          * @ngdoc
          * @name Step1Controller#removePhoto
          * @methodOf Step1Controller
-         * <pre><md-button ng-click="removePhoto()">Take Photo</md-button></pre>
+         * @example <pre><md-button ng-click="removePhoto()">Take Photo</md-button></pre>
          * @description
          * remove photo from system cache folder and photos array
          */
