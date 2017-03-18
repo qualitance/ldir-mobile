@@ -75,3 +75,27 @@ gulp.task('git-check', function (done) {
     }
     done();
 });
+
+gulp.task('ngdocs', [], function () {
+    var gulpDocs = require('gulp-ngdocs');
+
+    var options = {
+        scripts: [
+            'http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js',
+            'http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.min.js'
+        ]
+    };
+
+    return gulp.src('www/js/**/*.js')
+        .pipe(gulpDocs.process(options))
+        .pipe(gulp.dest('./docs'));
+});
+gulp.task('connect_ngdocs', function() {
+    var connect = require('gulp-connect');
+    connect.server({
+        root: 'docs',
+        livereload: false,
+        fallback: 'docs/index.html',
+        port: 8083
+    });
+});

@@ -1,6 +1,14 @@
 'use strict';
 
 angular.module('ServicesModule')
+    /**
+     * @ngdoc service
+     * @service
+     * @name CountyService
+     * @description The county service
+     * @requires $resource
+     * @requires appConfig
+     */
     .factory('CountyService', function ($resource, appConfig) {
 
         var countyResource = $resource(appConfig.serverUrl + 'counties/:id', {

@@ -1,7 +1,24 @@
 /**
- * Created by cristian on 07.05.2015.
+ * @ngdoc controller
+ * @name ProfileController
+ * @description profile view controller
+ * @property {Object} profileData - pile object
+ * @property {Object} passData - pile object
+ * @property {Boolean} viewPassForm - pile object
+ * @property {Object} phoneRegex - pile object
+ * @requires $scope
+ * @requires $state
+ * @requires $rootScope
+ * @requires navbarSetup
+ * @requires User
+ * @requires $mdToast
+ * @requires $ionicScrollDelegate
+ * @requires AuthService
+ * @requires $ionicViewSwitcher
+ * @requires $translate
+ * @requires CountryService
+ * @requires CountyService
  */
-
 angular.module('ProfileModule')
     .controller('ProfileController', ['$scope', '$state', '$rootScope', 'navbarSetup', 'User', '$mdToast',
         '$ionicScrollDelegate', 'AuthService', '$ionicViewSwitcher', '$translate', 'CountryService', 'CountyService',
@@ -21,6 +38,13 @@ angular.module('ProfileModule')
                 $scope.getCurrentUser();
             };
 
+            /**
+             * @ngdoc
+             * @name ProfileController#getCurrentUser
+             * @methodOf ProfileController
+             * @description
+             * gets current user and also country and county
+             */
             $scope.getCurrentUser = function () {
                 $rootScope.me = AuthService.getCurrentUser();
                 $scope.currentUser = angular.copy($rootScope.me);
@@ -39,6 +63,16 @@ angular.module('ProfileModule')
                 });
             };
 
+            /**
+             * @ngdoc
+             * @name ProfileController#changeCountry
+             * @methodOf ProfileController
+             * @param {Object} country - selected country object
+             * @example
+             * <pre><md-select name="country" ng-model="country" required ng-change="changeCountry(country)">...</md-select></pre>
+             * @description
+             * gets counties on country change
+             */
             $scope.changeCountry = function (country) {
                 CountyService.getCountiesFromServer(country._id).$promise.then(function (response) {
                     $scope.currentUser.county = undefined;
@@ -48,6 +82,15 @@ angular.module('ProfileModule')
                 });
             };
 
+            /**
+             * @ngdoc
+             * @name ProfileController#save
+             * @methodOf ProfileController
+             * @example
+             * <pre><button ng-click="save()">...</button></pre>
+             * @description
+             * gets counties on country change
+             */
             $scope.save = function () {
                 var form = document.getElementsByName('profileForm')[0];
                 var formScope = angular.element(form).scope();
@@ -66,12 +109,31 @@ angular.module('ProfileModule')
                 }
             };
 
+            /**
+             * @ngdoc
+             * @name ProfileController#togglePassForm
+             * @methodOf ProfileController
+             * @example
+             * <pre><md-button ng-click="togglePassForm()"</md-button></pre>
+             * @description
+             * toggle password form
+             */
             $scope.togglePassForm = function () {
                 $scope.viewPassForm = !$scope.viewPassForm;
                 $ionicScrollDelegate.resize();
                 $ionicScrollDelegate.scrollBottom();
             };
 
+            /**
+             * @ngdoc
+             * @name ProfileController#checkPasswordsMatch
+             * @methodOf ProfileController
+             * @param {Object} form - change password form
+             * @example
+             * <pre><input required type="password" name="repass" ng-model="passData.repass" ng-change="checkPasswordsMatch(passForm)"></pre>
+             * @description
+             * check if entered passwords match
+             */
             $scope.checkPasswordsMatch = function (form) {
                 if ($scope.passData.newPass === $scope.passData.oldPass) {
                     form.repass.$setValidity('samePass', false);
@@ -86,6 +148,16 @@ angular.module('ProfileModule')
                 }
             };
 
+            /**
+             * @ngdoc
+             * @name ProfileController#changePassword
+             * @methodOf ProfileController
+             * @param {Object} form - change password form
+             * @example
+             * <pre><md-button aria-label="Register" ng-click="changePassword(passForm)">Change Password</md-button></pre>
+             * @description
+             * changes old password for current user
+             */
             $scope.changePassword = function (form) {
                 form.$setSubmitted();
                 if (form.$valid) {
@@ -102,6 +174,16 @@ angular.module('ProfileModule')
                 }
             };
 
+            /**
+             * @ngdoc
+             * @name ProfileController#setPassword
+             * @methodOf ProfileController
+             * @param {Object} form - change password form
+             * @example
+             * <pre><md-button aria-label="Register" ng-click="setPassword(passForm)">Set Password</md-button></pre>
+             * @description
+             * sets new password if user has none
+             */
             $scope.setPassword = function (form) {
                 form.$setSubmitted();
                 User.changePassword({
@@ -117,6 +199,15 @@ angular.module('ProfileModule')
                 });
             };
 
+            /**
+             * @ngdoc
+             * @name ProfileController#goBack
+             * @methodOf ProfileController
+             * @example
+             * <pre><button ng-click="goBack()">...</button></pre>
+             * @description
+             * redirects to map view
+             */
             $scope.goBack = function () {
                 $scope.getUser();
                 $ionicViewSwitcher.nextDirection('back');

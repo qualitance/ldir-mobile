@@ -1,4 +1,13 @@
 angular.module('ServicesModule')
+    /**
+     * @ngdoc service
+     * @service
+     * @name TermsDialog
+     * @description terms dialog service
+     * @requires appConfig
+     * @requires $mdDialog
+     * @requires $translate
+     */
     .service('TermsDialog', ['appConfig', '$mdDialog', '$translate',
         function (appConfig, $mdDialog, $translate) {
 
@@ -12,6 +21,15 @@ angular.module('ServicesModule')
                 }
             };
 
+            /**
+             * @ngdoc controller
+             * @name TermsDialogController
+             * @description terms dialog controller
+             * @requires $scope
+             * @requires $mdDialog
+             * @requires $http
+             * @requires appConfig
+             */
             function TermsDialogController($scope, $mdDialog, $http, appConfig) {
 
                 $scope.init = function () {

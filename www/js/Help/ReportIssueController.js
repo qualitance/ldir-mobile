@@ -1,3 +1,20 @@
+/**
+ * @ngdoc controller
+ * @name ReportIssueController
+ * @description report issue page controller
+ * @property {Object} issue - issue to report object
+ * @requires $scope
+ * @requires $state
+ * @requires $rootScope
+ * @requires navbarSetup
+ * @requires $ionicHistory
+ * @requires $mdToast
+ * @requires Issue
+ * @requires appConfig
+ * @requires $cordovaSpinnerDialog
+ * @requires $ionicViewSwitcher
+ * @requires $translate
+ */
 angular.module('HelpModule').controller('ReportIssueController', ['$scope', '$state', '$rootScope', 'navbarSetup',
     '$ionicHistory', '$mdToast', 'Issue', 'appConfig', '$cordovaSpinnerDialog', '$ionicViewSwitcher', '$translate',
     function ($scope, $state, $rootScope, navbarSetup,
@@ -11,6 +28,15 @@ angular.module('HelpModule').controller('ReportIssueController', ['$scope', '$st
             $scope.issue = {};
         };
 
+        /**
+         * @ngdoc
+         * @name ReportIssueController#report
+         * @methodOf ReportIssueController
+         * @example
+         * <pre><form name="reportIssueForm" id="reportIssueForm" ng-submit="reportIssueForm.$valid && report()"></pre>
+         * @description
+         * sends report issue
+         */
         $scope.report = function () {
             var formScope = angular.element(document.querySelector('#reportIssueForm')).scope();
             var form = formScope.reportIssueForm;
@@ -39,6 +65,15 @@ angular.module('HelpModule').controller('ReportIssueController', ['$scope', '$st
             }
         };
 
+        /**
+         * @ngdoc
+         * @name ReportIssueController#goBack
+         * @methodOf ReportIssueController
+         * @example
+         * <pre><button ng-click="goBack()">...</button></pre>
+         * @description
+         * redirects to previous state or map
+         */
         $scope.goBack = function () {
             $ionicViewSwitcher.nextDirection('back');
             if ($rootScope.previousState && $rootScope.previousState.name) {

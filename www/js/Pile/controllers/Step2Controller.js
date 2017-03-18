@@ -1,3 +1,14 @@
+/**
+ * @ngdoc controller
+ * @name Step2Controller
+ * @description report pile step 2 controller
+ * @requires $scope
+ * @requires $rootScope
+ * @requires navbarSetup
+ * @requires $state
+ * @requires $mdToast
+ * @requires $translate
+ */
 angular.module('PileModule').controller('Step2Controller', ['$scope', '$rootScope', 'navbarSetup', '$state', '$mdToast',
     '$translate',
     function ($scope, $rootScope, navbarSetup, $state, $mdToast, $translate) {
@@ -35,6 +46,15 @@ angular.module('PileModule').controller('Step2Controller', ['$scope', '$rootScop
             }
         }, true);
 
+        /**
+         * @ngdoc
+         * @name Step2Controller#goToStep3
+         * @methodOf Step2Controller
+         * @example
+         * <pre><button ng-click="goToStep3()">...</button></pre>
+         * @description
+         * redirects to report pile step 3 if the pile has at 1 content type selected
+         */
         $scope.goToStep3 = function () {
 
             var content = [];
@@ -53,6 +73,15 @@ angular.module('PileModule').controller('Step2Controller', ['$scope', '$rootScop
             $state.go('app.pile.step3');
         };
 
+        /**
+         * @ngdoc
+         * @name Step2Controller#goBack
+         * @methodOf Step2Controller
+         * @example
+         * <pre><button ng-click="goBack()">...</button></pre>
+         * @description
+         * redirects to report pile step 1 view
+         */
         $scope.goBack = function () {
             $state.go('app.pile.step1');
         };

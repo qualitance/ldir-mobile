@@ -1,3 +1,10 @@
+/**
+ * @ngdoc service
+ * @service
+ * @name LocalStorageService
+ * @description The local storage service
+ * @requires $window
+ */
 angular.module('ServicesModule').factory('LocalStorageService', ['$window', function ($window) {
     return {
         set: function (key, value) {

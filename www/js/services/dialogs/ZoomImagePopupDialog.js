@@ -1,4 +1,12 @@
 angular.module('ServicesModule')
+    /**
+     * @ngdoc service
+     * @service
+     * @name ZoomImagePopupDialog
+     * @description zoom image dialog service
+     * @requires appConfig
+     * @requires $mdDialog
+     */
     .service('ZoomImagePopupDialog', ['appConfig', '$mdDialog',
         function (appConfig, $mdDialog) {
 
@@ -17,6 +25,15 @@ angular.module('ServicesModule')
                 }
             };
 
+            /**
+             * @ngdoc controller
+             * @name ZoomImagePopupDialogController
+             * @description zoom image dialog controller
+             * @property {Object} image - image object
+             * @requires $scope
+             * @requires $mdDialog
+             * @requires image
+             */
             function ZoomImagePopupDialogController($scope, $mdDialog, image) {
 
                 $scope.image = image || null;
